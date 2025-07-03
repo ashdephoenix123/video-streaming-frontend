@@ -8,13 +8,13 @@ const Navbar = () => {
       <Link href="/">
         <h1 className="text-lg font-medium flex gap-2">
           <Atom size={25} />
-          YouCube
+          YouRube
         </h1>
       </Link>
 
-      <div>
+      <Link href="/account">
         <CircleUserRound size={25} />
-      </div>
+      </Link>
     </div>
   );
 };

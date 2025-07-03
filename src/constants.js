@@ -36,3 +36,18 @@ export const routes = [
     icon: Heart,
   },
 ];
+
+export const profileTabs = [
+  {
+    id: "home",
+    label: "Home",
+  },
+  {
+    id: "videos",
+    label: "Videos",
+  },
+  {
+    id: "create",
+    label: "Create",
+  },
+];
