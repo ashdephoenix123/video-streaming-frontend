@@ -38,6 +38,9 @@ const CreateContent = () => {
       const res = await fetch(`${constants.apiURL}/upload`, {
         method: "POST",
         body: formData,
+        headers: {
+          "x-title": title,
+        },
       });
 
       if (!res.ok) {
