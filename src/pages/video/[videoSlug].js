@@ -27,10 +27,10 @@ VideoName.getLayout = function getLayout(page) {
 
 export async function getServerSideProps({ params }) {
   try {
-    const path = `${constants.apiURL}/videos/${params.videoSlug}`;
+    const path = `${constants.apiURL}/video/${params.videoSlug}`;
     const res = await fetch(path);
     const video = await res.json();
-    return { props: { video: constants.apiURL + video.url } };
+    return { props: { video: "http://localhost:5000" + video.url } };
   } catch (error) {
     console.log(error);
     return { props: { error: "Failed to fetch URL" } };

@@ -8,9 +8,9 @@ export default function Home({ allVideos, error }) {
   }
 
   let videos = allVideos.map((video) => (
-    <Link key={video.slug} href={`/videos/${video.slug}`}>
+    <Link key={video.slug} href={`/video/${video.slug}`}>
       <div>
-        <VideoPlayer src={constants.apiURL + video.url} />
+        <VideoPlayer src={"http://localhost:5000" + video.url} />
       </div>
       <h3 className="text-sm mt-2 font-medium">
         {video.slug.replace(/-/g, " ")}
