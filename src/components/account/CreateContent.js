@@ -20,6 +20,11 @@ const CreateContent = () => {
     defaultValues,
   });
 
+  const user =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+
   const {
     register,
     handleSubmit,
@@ -40,6 +45,7 @@ const CreateContent = () => {
         body: formData,
         headers: {
           "x-title": title,
+          "x-user-id": user.userId,
         },
       });
 
