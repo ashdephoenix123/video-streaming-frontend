@@ -2,21 +2,22 @@
 import { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
-export default function MainVideoPlayer({ src }) {
+export default function MainVideoPlayer({ media }) {
   const videoRef = useRef(null);
+  const { hlsUrl } = media;
 
   useEffect(() => {
     const video = videoRef.current;
 
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = src;
+      video.src = hlsUrl;
     } else if (Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource(src);
+      hls.loadSource(hlsUrl);
       hls.attachMedia(video);
       return () => hls.destroy();
     }
-  }, [src]);
+  }, [media]);
 
   return (
     <video

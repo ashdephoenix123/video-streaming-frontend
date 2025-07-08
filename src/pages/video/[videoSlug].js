@@ -12,7 +12,7 @@ const VideoName = ({ video, error }) => {
   return (
     <div className="grid grid-cols-12 gap-4">
       <div className="col-span-8 rounded-lg shadow overflow-hidden">
-        <MainVideoPlayer src={video} />
+        <MainVideoPlayer media={video} />
       </div>
       <div className="col-span-4 rounded-lg shadow overflow-hidden">
         <SuggestedVideos />
@@ -30,7 +30,7 @@ export async function getServerSideProps({ params }) {
     const path = `${constants.apiURL}/video/${params.videoSlug}`;
     const res = await fetch(path);
     const video = await res.json();
-    return { props: { video: "http://localhost:5000" + video.url } };
+    return { props: { video } };
   } catch (error) {
     console.log(error);
     return { props: { error: "Failed to fetch URL" } };
