@@ -8,21 +8,16 @@ export default function Home({ allVideos, error }) {
   }
 
   let videos = allVideos.map((video) => (
-    <Link key={video.slug} href={`/video/${video.slug}`}>
+    <Link key={video._id} href={`/video/${video.slug}`}>
       <div>
-        <VideoPlayer src={"http://localhost:5000" + video.url} />
+        <VideoPlayer src={video.hlsUrl} />
       </div>
-      <h3 className="text-sm mt-2 font-medium">
-        {video.slug.replace(/-/g, " ")}
-      </h3>
-      <p className="text-xs">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industrys
-      </p>
+      <h3 className="text-sm mt-2 font-medium">{video.title}</h3>
+      <p className="text-xs">{video.description}</p>
     </Link>
   ));
 
-  return <div className="grid grid-cols-3 gap-4">{videos}</div>;
+  return <div className="grid grid-cols-3 gap-x-4 gap-y-8">{videos}</div>;
 }
 
 export async function getServerSideProps(context) {
