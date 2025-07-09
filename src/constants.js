@@ -19,23 +19,24 @@ export const routes = [
   },
   {
     id: "your-videos",
-    href: "/",
+    href: "/your-videos",
     label: "Your Videos",
     icon: ListVideo,
   },
   {
     id: "watch-later",
-    href: "/",
+    href: "/watch-later",
     label: "Watch later",
     icon: Clock,
   },
   {
     id: "liked-videos",
-    href: "/",
+    href: "/liked-videos",
     label: "Liked Videos",
     icon: Heart,
   },
 ];
+// The above routes can be later made to a route like - /username/your-videos or /username/history
 
 export const profileTabs = [
   {
