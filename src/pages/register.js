@@ -4,6 +4,7 @@ import { constants } from "@/constants";
 import { registerSchema } from "@/schema/registerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
+import { getCookie } from "cookies-next/server";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
@@ -107,3 +108,26 @@ Register.getLayout = function getLayout(page) {
 };
 
 export default Register;
+
+export async function getServerSideProps({ req, res }) {
+  try {
+    const token = await getCookie("token", { req, res });
+
+    if (token) {
+      return {
+        redirect: {
+          destination: "/account",
+          permanent: false,
+        },
+      };
+    }
+
+    return {
+      props: {},
+    };
+  } catch (error) {
+    return {
+      props: { error: messages.error },
+    };
+  }
+}

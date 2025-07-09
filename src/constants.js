@@ -52,3 +52,7 @@ export const profileTabs = [
     label: "Create",
   },
 ];
+
+export const messages = {
+  error: "Something went wrong",
+};
