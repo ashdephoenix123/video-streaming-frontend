@@ -3,13 +3,17 @@ import TextField from "@/components/TextField";
 import { constants } from "@/constants";
 import { registerSchema } from "@/schema/registerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const methods = useForm({
     resolver: yupResolver(registerSchema),
   });
+  const router = useRouter();
 
   const {
     register,
@@ -18,22 +22,26 @@ const Register = () => {
     reset,
   } = methods;
 
-  console.log(errors);
-
   const onSubmit = async (data) => {
-    console.log(data);
     const { cpassword, ...rest } = data;
+    const body = JSON.stringify(rest);
 
-    const res = await fetch(constants.apiURL + "/user/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(rest),
-    });
+    try {
+      const res = await axios.post(constants.apiURL + "/user/register", body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const jsonRes = await res.json();
-    console.log(jsonRes);
+      if (res.status === 201) {
+        reset();
+        toast.success("Registered successfully, Please sign in.");
+        router.push("/sign-in");
+      }
+    } catch (error) {
+      const message = error.response.data.message || "Something went wrong!";
+      toast.error(message);
+    }
   };
 
   return (

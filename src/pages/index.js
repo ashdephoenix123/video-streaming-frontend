@@ -1,3 +1,4 @@
+import axiosToken from "@/axios/tokenAxios";
 import VideoPlayer from "@/components/VideoPlayer";
 import { constants } from "@/constants";
 import Link from "next/link";
@@ -20,11 +21,13 @@ export default function Home({ allVideos, error }) {
   return <div className="grid grid-cols-3 gap-x-4 gap-y-8">{videos}</div>;
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   try {
-    const res = await fetch(`${constants.apiURL}/videos`);
-    const allVideos = await res.json();
-    return { props: { allVideos } };
+    const res = await axiosToken.get(`${constants.apiURL}/videos`);
+    if (res.statusText != "OK") {
+      throw new Error("Error fetching videos");
+    }
+    return { props: { allVideos: res.data } };
   } catch (error) {
     return { props: { error: "Failed to Fetch!" } };
   }

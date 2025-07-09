@@ -1,14 +1,13 @@
-import { Plus } from "lucide-react";
-import React, { Fragment, useRef, useState } from "react";
-import TextField from "../TextField";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "@/schema/validationSchema";
-import UploadVideo from "./UploadVideo";
-import toast from "react-hot-toast";
 import { constants } from "@/constants";
-import Loading from "../Loading";
+import { schema } from "@/schema/validationSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import Backdrop from "../Backdrop";
+import Loading from "../Loading";
+import TextField from "../TextField";
+import UploadVideo from "./UploadVideo";
 
 const defaultValues = {
   video: null,
@@ -44,16 +43,14 @@ const CreateContent = () => {
     formData.append("userId", userId);
 
     try {
-      const res = await fetch(`${constants.apiURL}/upload`, {
-        method: "POST",
-        body: formData,
+      const res = await axios.post(`${constants.apiURL}/upload`, formData, {
+        withCredentials: true,
         headers: {
           "x-title": title,
           "x-user-id": userId,
         },
       });
-
-      if (!res.ok) {
+      if (res.statusText != "OK") {
         toast.error("Some error occured!");
         return;
       }

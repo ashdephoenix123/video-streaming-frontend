@@ -3,6 +3,7 @@ import TextField from "@/components/TextField";
 import { constants } from "@/constants";
 import { loginSchema } from "@/schema/loginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
@@ -21,21 +22,18 @@ const SignIn = () => {
 
   const onSubmit = async (data) => {
     const { password, email } = data;
+    const body = JSON.stringify({ email, password });
 
-    const res = await fetch(constants.apiURL + "/user/login", {
-      method: "POST",
+    const res = await axios.post(constants.apiURL + "/user/login", body, {
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
-      credentials: "include",
     });
-
-    const jsonRes = await res.json();
     if (res.statusText != "OK") {
       console.log("signin failed");
     } else {
-      localStorage.setItem("user", JSON.stringify(jsonRes));
+      localStorage.setItem("user", JSON.stringify(res.data));
       router.push("/account");
     }
   };
