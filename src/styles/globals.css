@@ -35,3 +35,7 @@ body {
 .lucide {
   stroke-width: 1.5;
 }
+
+#nprogress .spinner {
+  display: none !important;
+}
