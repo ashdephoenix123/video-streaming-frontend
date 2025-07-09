@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ProfileTabs from "./ProfileTabs";
 import ProfileHome from "./ProfileHome";
 import MyVideos from "./MyVideos";
 import CreateContent from "./CreateContent";
+import { useRouter } from "next/router";
 
 const Actions = () => {
-  const [active, setActive] = useState("home");
+  const router = useRouter();
+  const { tab } = router.query;
+  const getActiveTab = useCallback(() => tab ?? "home", [tab]);
+  const [active, setActive] = useState(getActiveTab());
+
+  useEffect(() => {
+    setActive(getActiveTab());
+  }, [tab, getActiveTab]);
 
   const updateActiveTab = (id) => {
     setActive(id);
+    router.push(`/account?tab=${id}`, undefined, { shallow: true });
   };
 
   const activeContent = () => {

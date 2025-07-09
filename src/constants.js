@@ -13,7 +13,7 @@ export const routes = [
   },
   {
     id: "history",
-    href: "/",
+    href: "/history",
     label: "History",
     icon: History,
   },
