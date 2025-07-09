@@ -1,5 +1,6 @@
 import AccountDescription from "@/components/account/AccountDescription";
 import Actions from "@/components/account/Actions";
+import { getCookie } from "cookies-next/server";
 import React from "react";
 
 const Account = () => {
@@ -12,3 +13,20 @@ const Account = () => {
 };
 
 export default Account;
+
+export async function getServerSideProps({ req, res }) {
+  const token = await getCookie("token", { req, res });
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "sign-in",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

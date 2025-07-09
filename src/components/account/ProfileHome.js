@@ -1,10 +1,19 @@
+import { constants } from "@/constants";
+import axios from "axios";
 import { useRouter } from "next/router";
 import React from "react";
 
 const ProfileHome = () => {
   const router = useRouter();
 
-  const loguserOut = () => {
+  const loguserOut = async () => {
+    await axios.post(
+      constants.apiURL + "/user/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     localStorage.removeItem("user");
     router.push("sign-in");
   };
