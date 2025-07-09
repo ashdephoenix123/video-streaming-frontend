@@ -20,7 +20,6 @@ const SignIn = () => {
   } = methods;
 
   const onSubmit = async (data) => {
-    console.log(data);
     const { password, email } = data;
 
     const res = await fetch(constants.apiURL + "/user/login", {
@@ -29,6 +28,7 @@ const SignIn = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+      credentials: "include",
     });
 
     const jsonRes = await res.json();
