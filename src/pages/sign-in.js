@@ -8,6 +8,7 @@ import { getCookie } from "cookies-next/server";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const router = useRouter();
@@ -25,17 +26,22 @@ const SignIn = () => {
     const { password, email } = data;
     const body = JSON.stringify({ email, password });
 
-    const res = await axios.post(constants.apiURL + "/user/login", body, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (res.statusText != "OK") {
-      console.log("signin failed");
-    } else {
-      localStorage.setItem("user", JSON.stringify(res.data));
-      router.push("/account");
+    try {
+      const res = await axios.post(constants.apiURL + "/user/login", body, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.statusText != "OK") {
+        console.log("signin failed");
+      } else {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        router.push("/account");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Login Failed. Something went wrong.");
     }
   };
 
