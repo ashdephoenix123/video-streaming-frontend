@@ -1,4 +1,5 @@
 import Layout from "@/components/layouts";
+import { UserProvider } from "@/contexts/UserContext";
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NextNProgress from "nextjs-progressbar";
@@ -22,10 +23,12 @@ export default function App({ Component, pageProps }) {
         height={2}
         showOnShallow={true}
       />
-      <QueryClientProvider client={queryClient}>
-        <Toaster toastOptions={{ style: toastStyle }} />
-        {getLayout(<Component {...pageProps} />)}
-      </QueryClientProvider>
+      <UserProvider>
+        <QueryClientProvider client={queryClient}>
+          <Toaster toastOptions={{ style: toastStyle }} />
+          {getLayout(<Component {...pageProps} />)}
+        </QueryClientProvider>
+      </UserProvider>
     </>
   );
 }

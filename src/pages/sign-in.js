@@ -1,6 +1,7 @@
 import Layout from "@/components/layouts";
 import TextField from "@/components/TextField";
 import { constants, messages } from "@/constants";
+import { useUser } from "@/contexts/UserContext";
 import { loginSchema } from "@/schema/loginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
@@ -15,6 +16,7 @@ const SignIn = () => {
   const methods = useForm({
     resolver: yupResolver(loginSchema),
   });
+  const { login } = useUser();
 
   const {
     register,
@@ -36,7 +38,7 @@ const SignIn = () => {
       if (res.statusText != "OK") {
         console.log("signin failed");
       } else {
-        localStorage.setItem("user", JSON.stringify(res.data));
+        await login(res.data);
         router.push("/account");
       }
     } catch (error) {
