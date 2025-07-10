@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import Layout from "@/components/layouts";
 import TextField from "@/components/TextField";
 import { constants } from "@/constants";
@@ -82,13 +83,13 @@ const Register = () => {
               error={errors.cpassword?.message}
             />
 
-            <button
+            <Button
               type="submit"
               disabled={isSubmitting || Object.keys(errors).length > 0}
-              className="px-4 py-2 rounded bg-red-600 disabled:bg-neutral-800 block w-full cursor-pointer disabled:cursor-not-allowed"
+              className="disabled:bg-neutral-800 block w-full disabled:cursor-not-allowed"
             >
               Sign Up
-            </button>
+            </Button>
           </form>
         </FormProvider>
 

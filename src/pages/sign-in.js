@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import Layout from "@/components/layouts";
 import TextField from "@/components/TextField";
 import { constants, messages } from "@/constants";
@@ -78,12 +79,9 @@ const SignIn = () => {
               Forgot password?
             </Link>
 
-            <button
-              type="submit"
-              className="px-4 py-2 rounded bg-red-600 block  w-full"
-            >
+            <Button type="submit" className="block w-full">
               Sign In
-            </button>
+            </Button>
           </form>
         </FormProvider>
         <p className="text-neutral-400 text-xs mt-6 text-center">

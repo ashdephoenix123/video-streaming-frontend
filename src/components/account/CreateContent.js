@@ -8,6 +8,7 @@ import Backdrop from "../Backdrop";
 import Loading from "../Loading";
 import TextField from "../TextField";
 import UploadVideo from "./UploadVideo";
+import Button from "../Button";
 
 const defaultValues = {
   video: null,
@@ -86,9 +87,7 @@ const CreateContent = () => {
             {...register("description")}
             error={errors.description?.message}
           />
-          <button type="submit" className="px-4 py-2 rounded bg-red-600">
-            Upload
-          </button>
+          <Button type="submit">Upload</Button>
         </form>
       </FormProvider>
       {isSubmitting && (

@@ -4,6 +4,7 @@ import { useUser } from "@/contexts/UserContext";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React from "react";
+import Button from "../Button";
 
 const ProfileHome = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const ProfileHome = () => {
   };
   return (
     <div>
-      <button onClick={loguserOut}>Log out</button>
+      <Button onClick={loguserOut}>Log Out</Button>
     </div>
   );
 };
