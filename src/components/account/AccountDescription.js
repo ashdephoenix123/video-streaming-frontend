@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import Loading from "../Loading";
 
 const AccountDescription = () => {
-  const { user, updateAvatar } = useUser();
+  const { user, addUserData } = useUser();
   const imgRef = useRef(null);
   const [preview, setPreview] = useState(
     user && user?.avatarURL ? user.avatarURL : "/default-user.jpg"
@@ -42,7 +42,6 @@ const AccountDescription = () => {
         );
 
         if (response.statusText === "OK") {
-          updateAvatar(response.data.imageUrl);
           setPreview(response.data.imageUrl);
           toast.success("Avatar updated!");
         }
@@ -51,8 +50,11 @@ const AccountDescription = () => {
         toast.error("Avatar update failed!");
       }
     },
-    onSuccess: () => {
-      console.log("success");
+    onSuccess: async () => {
+      const getUser = await axiosToken.get(
+        constants.apiURL + `/user/${user?.userId}`
+      );
+      await addUserData(getUser.data);
       // Invalidate and refetch the 'todos' query after successful mutation
       // queryClient.invalidateQueries({ queryKey: ["todos"] });
     },

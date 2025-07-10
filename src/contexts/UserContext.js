@@ -5,7 +5,7 @@ const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = async (userData) => {
+  const addUserData = async (userData) => {
     localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
   };
@@ -13,14 +13,6 @@ export const UserProvider = ({ children }) => {
   const logout = async () => {
     localStorage.removeItem("user");
     setUser(null);
-  };
-
-  const updateAvatar = (url) => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      const user = { ...JSON.parse(savedUser), avatarURL: url };
-      localStorage.setItem("user", JSON.stringify(user));
-    }
   };
 
   useEffect(() => {
@@ -31,7 +23,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, login, logout, updateAvatar }}>
+    <UserContext.Provider value={{ user, addUserData, logout }}>
       {children}
     </UserContext.Provider>
   );

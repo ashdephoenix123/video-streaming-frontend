@@ -17,7 +17,7 @@ const SignIn = () => {
   const methods = useForm({
     resolver: yupResolver(loginSchema),
   });
-  const { login } = useUser();
+  const { addUserData } = useUser();
 
   const {
     register,
@@ -39,12 +39,13 @@ const SignIn = () => {
       if (res.statusText != "OK") {
         console.log("signin failed");
       } else {
-        await login(res.data);
+        await addUserData(res.data);
         router.push("/account");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Login Failed. Something went wrong.");
+      const msg = error.response.data.message || messages.error;
+      toast.error(msg);
     }
   };
 
