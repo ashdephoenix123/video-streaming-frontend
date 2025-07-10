@@ -1,9 +1,7 @@
 import axiosToken from "@/axios/tokenAxios";
 import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
-import axios from "axios";
 import { useRouter } from "next/router";
-import React from "react";
 import Button from "../Button";
 
 const ProfileHome = () => {
@@ -16,8 +14,10 @@ const ProfileHome = () => {
     router.push("sign-in");
   };
   return (
-    <div>
-      <Button onClick={loguserOut}>Log Out</Button>
+    <div className="flex flex-col gap-4">
+      <Button className="max-w-max" onClick={loguserOut}>
+        Log Out
+      </Button>
     </div>
   );
 };

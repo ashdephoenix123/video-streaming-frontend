@@ -15,6 +15,14 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updateAvatar = (url) => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      const user = { ...JSON.parse(savedUser), avatarURL: url };
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+  };
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -23,7 +31,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, login, logout, updateAvatar }}>
       {children}
     </UserContext.Provider>
   );
