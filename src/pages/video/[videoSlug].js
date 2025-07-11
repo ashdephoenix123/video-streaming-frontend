@@ -1,6 +1,7 @@
 import Layout from "@/components/layouts";
 import MainVideoPlayer from "@/components/MainVideoPlayer";
 import SuggestedVideos from "@/components/SuggestedVideos";
+import VideoDescription from "@/components/VideoDescription";
 import { constants } from "@/constants";
 import axios from "axios";
 import React from "react";
@@ -14,6 +15,7 @@ const VideoName = ({ video, error }) => {
     <div className="grid grid-cols-12 gap-4">
       <div className="col-span-8 rounded-lg shadow overflow-hidden">
         <MainVideoPlayer media={video} />
+        <VideoDescription media={video} />
       </div>
       <div className="col-span-4 rounded-lg shadow overflow-hidden">
         <SuggestedVideos />
