@@ -1,6 +1,7 @@
 import VideoPlayer from "@/components/VideoPlayer";
 import { constants } from "@/constants";
 import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home({ allVideos, error }) {
@@ -13,12 +14,23 @@ export default function Home({ allVideos, error }) {
       <div>
         <VideoPlayer src={video.hlsUrl} />
       </div>
-      <h3 className="text-sm mt-2 font-medium">{video.title}</h3>
-      <p className="text-xs">{video.description}</p>
+      <div className="flex gap-2 mt-3 text-sm">
+        <Image
+          src={video.userId?.avatarURL ?? "/default-user.jpg"}
+          alt="default user image"
+          width={35}
+          height={35}
+          className="rounded-full self-baseline"
+        />
+        <div>
+          <h3 className="tracking-wide">{video.title}</h3>
+          <p className="text-neutral-400">{video.userId?.username}</p>
+        </div>
+      </div>
     </Link>
   ));
 
-  return <div className="grid grid-cols-3 gap-x-4 gap-y-8">{videos}</div>;
+  return <div className="grid grid-cols-4 gap-x-2 gap-y-8">{videos}</div>;
 }
 
 export async function getServerSideProps() {

@@ -11,12 +11,12 @@ const SideBarLayout = ({ children }) => {
     return (
       <li
         key={route.id}
-        className={`text-xs px-2 py-2 rounded-lg font-medium cursor-pointer hover:bg-neutral-600/40 hover:transition-all active:bg-neutral-600/30 select-none ${
+        className={`text-xs  rounded-lg font-medium cursor-pointer hover:bg-neutral-600/40 hover:transition-all active:bg-neutral-600/30 select-none ${
           route.id === active ? "bg-neutral-600/40" : ""
         }`}
         onClick={() => setActive(route.id)}
       >
-        <Link className="flex items-center gap-4 " href={route.href}>
+        <Link className="flex items-center gap-4 px-2 py-2" href={route.href}>
           <Icon size={20} />
           {label}
         </Link>
