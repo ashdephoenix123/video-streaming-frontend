@@ -1,8 +1,60 @@
 import Image from "next/image";
 import React from "react";
 import Button from "./Button";
+import { Bookmark, ThumbsUp } from "lucide-react";
+import axiosToken from "@/axios/tokenAxios";
+import { constants, messages } from "@/constants";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+import { useUser } from "@/contexts/UserContext";
 
 const VideoDescription = ({ media }) => {
+  const router = useRouter();
+  const { user } = useUser();
+
+  const likeVideo = async () => {
+    try {
+      const body = { userId: user.userId, mediaId: media._id, action: "like" };
+      const res = await axiosToken.post(
+        constants.apiURL + `/user/likeOrSave`,
+        body
+      );
+
+      if (res.status === 200) {
+        console.log(res);
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      if (error.status === 401) {
+        router.replace("/sign-in");
+        return;
+      }
+      console.log(error);
+      toast.error(messages.error);
+    }
+  };
+
+  const saveVideo = async () => {
+    try {
+      const body = { userId: user.userId, mediaId: media._id, action: "save" };
+      const res = await axiosToken.post(
+        constants.apiURL + `/user/likeOrSave`,
+        body
+      );
+
+      if (res.status === 200) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      if (error.status === 401) {
+        router.replace("/sign-in");
+        return;
+      }
+      console.log(error);
+      toast.error(messages.error);
+    }
+  };
+
   return (
     <div className="my-4">
       <h1 className="tracking-tight text-lg font-semibold">{media.title}</h1>
@@ -14,15 +66,42 @@ const VideoDescription = ({ media }) => {
           height={35}
           className="rounded-full self-baseline"
         />
-        <div>
-          <h2 className="tracking-tight text-base font-semibold">
-            {media.userId?.username}
-          </h2>
-          <p className="text-neutral-400 text-xs">Subscriber count</p>
+        <div className="flex items-center w-full">
+          <div>
+            <h2 className="tracking-tight text-base font-semibold">
+              {media.userId?.username}
+            </h2>
+            <p className="text-neutral-400 text-xs">Subscriber count</p>
+          </div>
+          {/* <Button
+            variant="secondary"
+            className="rounded-full text-xs font-medium ml-4 self-center py-1.5 leading-6"
+          >
+            Subscribe
+          </Button> */}
+          <div className="ml-auto">
+            <Button
+              onClick={likeVideo}
+              variant="tertiary"
+              className="items-center gap-1 rounded-full text-xs font-medium ml-2 self-center py-1.5"
+            >
+              <div className="flex items-center gap-1">
+                <ThumbsUp size={18} />
+                Like
+              </div>
+            </Button>
+            <Button
+              onClick={saveVideo}
+              variant="tertiary"
+              className="items-center gap-1 rounded-full text-xs font-medium ml-2 self-center py-1.5"
+            >
+              <div className="flex items-center gap-1">
+                <Bookmark size={18} />
+                Save
+              </div>
+            </Button>
+          </div>
         </div>
-        <Button className="bg-white rounded-full text-black text-xs font-medium ml-2 self-center py-1.5">
-          Subscribe
-        </Button>
       </div>
     </div>
   );

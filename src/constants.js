@@ -19,7 +19,7 @@ export const routes = [
   },
   {
     id: "your-videos",
-    href: "/your-videos",
+    href: "/account?tab=videos",
     label: "Your Videos",
     icon: ListVideo,
   },
