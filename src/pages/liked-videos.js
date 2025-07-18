@@ -17,7 +17,7 @@ const menuItems = [
 const LikedVideos = ({ data, error }) => {
   const { user } = useUser();
   const router = useRouter();
-  const [userLiked, setUserLiked] = useState(data.likedVideos);
+  const [userLiked, setUserLiked] = useState(data?.likedVideos);
   const { mutate } = useMutation({
     mutationFn: async ({ videoId, action }) => {
       await likeVideo(user.userId, videoId, action, router);
@@ -85,7 +85,7 @@ export async function getServerSideProps({ req }) {
 
     return {
       props: {
-        data: response.data || [],
+        data: response.data || {},
       },
     };
   } catch (error) {

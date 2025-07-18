@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "./Button";
 import { Bookmark, ThumbsUp } from "lucide-react";
 import axiosToken from "@/axios/tokenAxios";
@@ -7,6 +7,7 @@ import { constants, messages } from "@/constants";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { useUser } from "@/contexts/UserContext";
+import { saveHistory } from "@/axios/api";
 
 const VideoDescription = ({ media }) => {
   const router = useRouter();
@@ -54,6 +55,12 @@ const VideoDescription = ({ media }) => {
       toast.error(messages.error);
     }
   };
+
+  useEffect(() => {
+    if (user?.userId && media?._id) {
+      saveHistory(user.userId, media._id);
+    }
+  }, [user?.userId, media?._id]);
 
   return (
     <div className="my-4">

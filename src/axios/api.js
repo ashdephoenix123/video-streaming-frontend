@@ -31,3 +31,20 @@ export const likeVideo = async (userId, mediaId, action, router) => {
     toast.error(messages.error);
   }
 };
+
+export const saveHistory = async (userId, videoId) => {
+  try {
+    if (!userId) return;
+    await axiosToken.post(constants.apiURL + `/user/history/`, {
+      userId,
+      videoId,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchHistory = async () => {
+  const res = await axiosToken.get(`/user/history/user`);
+  return res;
+};

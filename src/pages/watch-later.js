@@ -14,7 +14,7 @@ const menuItems = [{ icon: Trash2, label: "Remove", id: "save" }];
 const WatchLater = ({ data, error }) => {
   const { user } = useUser();
   const router = useRouter();
-  const [userSaved, setUserSaved] = useState(data.savedVideos);
+  const [userSaved, setUserSaved] = useState(data?.savedVideos);
   const { mutate } = useMutation({
     mutationFn: async ({ videoId, action }) => {
       await likeVideo(user.userId, videoId, action, router);
@@ -81,7 +81,7 @@ export async function getServerSideProps({ req }) {
 
     return {
       props: {
-        data: response.data || [],
+        data: response.data || {},
       },
     };
   } catch (error) {
