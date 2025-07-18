@@ -7,6 +7,12 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Timer, Trash2 } from "lucide-react";
+
+const menuItems = [
+  { icon: Trash2, label: "Remove", id: "like" },
+  { icon: Timer, label: "Add to Watch Later", id: "save" },
+];
 
 const LikedVideos = ({ data, error }) => {
   const { user } = useUser();
@@ -14,7 +20,6 @@ const LikedVideos = ({ data, error }) => {
   const [userLiked, setUserLiked] = useState(data.likedVideos);
   const { mutate } = useMutation({
     mutationFn: async ({ videoId, action }) => {
-      console.log(videoId, action);
       await likeVideo(user.userId, videoId, action, router);
       return { videoId, action };
     },
@@ -54,6 +59,7 @@ const LikedVideos = ({ data, error }) => {
                   uploaderName: data.userName,
                   uploaderAvatar: data.userAvatar,
                 }}
+                menuItems={menuItems}
                 mutate={mutate}
               />
             ))

@@ -1,15 +1,10 @@
 import VideoPlayer from "@/components/VideoPlayer";
 import { formatDistanceToNow } from "date-fns";
-import { EllipsisVertical, Timer, Trash2 } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-const menuItems = [
-  { icon: Trash2, label: "Remove", id: "like" },
-  { icon: Timer, label: "Add to Watch Later", id: "save" },
-];
-
-const VideoCard = ({ vid, uploader, mutate }) => {
+const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   const [show, setShow] = useState(false);
 
   const itemAction = async (action) => {
