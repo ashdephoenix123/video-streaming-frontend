@@ -1,11 +1,29 @@
+import { likeVideo } from "@/axios/api";
 import SignedOutUI from "@/components/signed-out/LikedVideos";
 import VideoCard from "@/components/VideoCard";
 import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const LikedVideos = ({ data, error }) => {
   const { user } = useUser();
+  const router = useRouter();
+  const [userLiked, setUserLiked] = useState(data.likedVideos);
+  const { mutate } = useMutation({
+    mutationFn: async ({ videoId, action }) => {
+      console.log(videoId, action);
+      await likeVideo(user.userId, videoId, action, router);
+      return { videoId, action };
+    },
+    onSuccess: ({ videoId, action }) => {
+      if (action === "like") {
+        setUserLiked((prev) => prev.filter((vid) => vid._id != videoId));
+      }
+    },
+  });
 
   if (!user || (error && error[0] === 401)) {
     return <SignedOutUI />;
@@ -15,7 +33,6 @@ const LikedVideos = ({ data, error }) => {
     return <p>{error[1]}</p>;
   }
 
-  let userLiked = data.likedVideos;
   let noLikedVids = (
     <p className="italic text-neutral-400">
       Your liked videos will be available here.
@@ -33,7 +50,11 @@ const LikedVideos = ({ data, error }) => {
               <VideoCard
                 key={vid.id}
                 vid={vid}
-                user={{ username: data.userName, userAvatar: data.userAvatar }}
+                uploader={{
+                  uploaderName: data.userName,
+                  uploaderAvatar: data.userAvatar,
+                }}
+                mutate={mutate}
               />
             ))
           : noLikedVids}
