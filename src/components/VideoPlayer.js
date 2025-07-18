@@ -1,8 +1,9 @@
 // components/VideoPlayer.jsx
 import { useEffect, useRef } from "react";
 import Hls from "hls.js";
+import { cn } from "@/lib/utils";
 
-export default function VideoPlayer({ src }) {
+export default function VideoPlayer({ src, className = "" }) {
   const videoRef = useRef(null);
   const timeoutRef = useRef(null);
 
@@ -40,7 +41,10 @@ export default function VideoPlayer({ src }) {
       muted
       playsInline
       preload="metadata"
-      className="w-full aspect-video rounded-lg shadow cursor-pointer"
+      className={cn(
+        "w-full aspect-video rounded-lg shadow cursor-pointer",
+        className
+      )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     />
