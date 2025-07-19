@@ -13,7 +13,12 @@ const VideoDescription = ({ media }) => {
   const router = useRouter();
   const { user } = useUser();
 
+  const checkAuth = () => {
+    if (!user) router.push("/sign-in");
+  };
+
   const likeVideo = async () => {
+    checkAuth();
     try {
       const body = { userId: user.userId, mediaId: media._id, action: "like" };
       const res = await axiosToken.post(
@@ -31,11 +36,12 @@ const VideoDescription = ({ media }) => {
         return;
       }
       console.log(error);
-      toast.error(messages.error);
+      // toast.error(messages.error);
     }
   };
 
   const saveVideo = async () => {
+    checkAuth();
     try {
       const body = { userId: user.userId, mediaId: media._id, action: "save" };
       const res = await axiosToken.post(
@@ -52,7 +58,6 @@ const VideoDescription = ({ media }) => {
         return;
       }
       console.log(error);
-      toast.error(messages.error);
     }
   };
 

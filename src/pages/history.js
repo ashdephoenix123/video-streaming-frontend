@@ -1,5 +1,4 @@
-import { fetchHistory, removeVidFromHistory } from "@/axios/api";
-import axiosToken from "@/axios/tokenAxios";
+import { removeVidFromHistory } from "@/axios/api";
 import SignedOutUI from "@/components/signed-out/history";
 import VideoCard from "@/components/VideoCard";
 import { constants } from "@/constants";
@@ -7,13 +6,13 @@ import { useUser } from "@/contexts/UserContext";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Trash2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const menuItems = [{ icon: Trash2, label: "Remove", id: "history" }];
 
 const History = ({ media, error }) => {
   const { user } = useUser();
-  const [historyVideos, setHistoryVideos] = useState(media.historyVideos);
+  const [historyVideos, setHistoryVideos] = useState(media?.historyVideos);
 
   const { mutate } = useMutation({
     mutationFn: async ({ videoId }) => {
