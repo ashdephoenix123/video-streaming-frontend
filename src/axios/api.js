@@ -48,3 +48,13 @@ export const fetchHistory = async () => {
   const res = await axiosToken.get(`/user/history/user`);
   return res;
 };
+
+export const removeVidFromHistory = async (videoId) => {
+  try {
+    await axiosToken.post(`/user/history/remove`, {
+      videoId,
+    });
+  } catch (error) {
+    toast.error(messages.error);
+  }
+};

@@ -8,9 +8,17 @@ import { useState } from "react";
 const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   const [show, setShow] = useState(false);
 
-  const itemAction = async (action) => {
+  const itemAction = async (e, action) => {
+    e.preventDefault();
+    e.stopPropagation();
     mutate({ videoId: vid._id, action });
     setShow(false);
+  };
+
+  const handleMenu = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShow((prev) => !prev);
   };
 
   let dropdownContent = (
@@ -18,7 +26,7 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
       <ul className="text-xs min-w-24 text-center">
         {menuItems.map((item) => (
           <li
-            onClick={() => itemAction(item.id)}
+            onClick={(e) => itemAction(e, item.id)}
             key={item.label}
             className="px-4 py-2.5 border-b last:border-0 border-b-neutral-600 hover:bg-neutral-800 cursor-pointer whitespace-nowrap transition-all duration-300 flex gap-2 items-center"
           >
@@ -72,7 +80,7 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
         <div className="relative">
           <EllipsisVertical
             size={20}
-            onClick={() => setShow((prev) => !prev)}
+            onClick={handleMenu}
             className="cursor-pointer"
           />
           {show && dropdownContent}
