@@ -2,6 +2,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import { formatDistanceToNow } from "date-fns";
 import { EllipsisVertical } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
@@ -29,8 +30,8 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   );
 
   return (
-    <div
-      key={vid}
+    <Link
+      href={"/video/" + vid?.slug}
       className="border border-neutral-700 rounded-lg overflow-hidden flex"
     >
       <div className="w-80 relative h-44 overflow-hidden">
@@ -77,7 +78,7 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
           {show && dropdownContent}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
