@@ -11,7 +11,7 @@ const SuggestedVideos = () => {
       <div key={vid.id} className="flex gap-2">
         <div className="relative h-24 w-full max-w-40 flex-shrink-0 rounded-lg overflow-hidden">
           <Image
-            src="/sample.jpg"
+            src="/placeholder.jpg"
             alt="sample-image"
             fill
             className="object-cover"

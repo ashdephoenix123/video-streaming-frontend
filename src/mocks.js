@@ -44,4 +44,13 @@ export const suggestedVideos = [
     },
     uploadDate: "2025-06-15T16:45:00Z",
   },
+  {
+    id: 6,
+    title: "React vs Vue: Which is Better?",
+    slug: "react-vs-vue",
+    channel: {
+      name: "Frontend Guru",
+    },
+    uploadDate: "2025-06-15T16:45:00Z",
+  },
 ];
