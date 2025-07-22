@@ -1,8 +1,9 @@
 import { useUser } from "@/contexts/UserContext";
-import { Atom, CircleUserRound, UserRound } from "lucide-react";
+import { Atom, CircleUserRound, Tv, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { projectName } from "@/constants";
 
 const Navbar = () => {
   const { user } = useUser();
@@ -11,8 +12,8 @@ const Navbar = () => {
     <div className="h-16 flex items-center justify-between">
       <Link href="/">
         <h1 className="text-lg font-medium flex gap-2">
-          <Atom size={25} />
-          YouRube
+          <Tv size={25} />
+          {projectName}
         </h1>
       </Link>
 
