@@ -36,7 +36,7 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
-      if (res.statusText != "OK") {
+      if (res.status != 200) {
         console.log("signin failed");
       } else {
         await addUserData(res.data);

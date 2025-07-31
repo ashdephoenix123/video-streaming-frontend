@@ -36,7 +36,7 @@ export default function Home({ allVideos, error }) {
 export async function getServerSideProps() {
   try {
     const res = await axios.get(`${constants.apiURL}/videos`);
-    if (res.statusText != "OK") {
+    if (res.status != 200) {
       throw new Error("Error fetching videos");
     }
     return { props: { allVideos: res.data } };

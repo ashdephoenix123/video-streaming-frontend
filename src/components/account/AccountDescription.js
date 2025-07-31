@@ -41,7 +41,7 @@ const AccountDescription = () => {
           }
         );
 
-        if (response.statusText === "OK") {
+        if (response.status != 200) {
           setPreview(response.data.imageUrl);
           toast.success("Avatar updated!");
         }

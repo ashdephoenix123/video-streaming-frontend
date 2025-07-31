@@ -51,7 +51,7 @@ const CreateContent = () => {
           "x-user-id": userId,
         },
       });
-      if (res.statusText != "OK") {
+      if (res.status != 200) {
         toast.error("Some error occured!");
         return;
       }
