@@ -31,5 +31,5 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## More Info - For Personal Use:
 
-- Project deployed in [https://vercel.com/dashboard](Vercel) via Personal Github Acc
-- Backend deployed in [https://dashboard.render.com/](render) via primary Gmail Account
+- Project deployed in [Vercel](https://vercel.com/dashboard) via Personal Github Acc
+- Backend deployed in [Render](https://dashboard.render.com/) via primary Gmail Account
