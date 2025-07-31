@@ -1,6 +1,8 @@
-FlixStream is a project where you can upload videos and check the videos which other uploaded (similar to YouTube).
-Tech Note - Videos are sent as packets and sent as hls format.
-Backend deployed in render.com thus it might take 10 - 15 seconds if the app is opened for the first time after a while.
+**FlixStream** is a project where you can upload videos and check the videos which other uploaded (similar to YouTube).
+
+## Tech Note -
+- Videos are sent as packets and sent as hls format.
+- Backend deployed in render.com thus it might take 10 - 15 seconds if the app is opened for the first time after a while.
 
 ## Technology Used -
 
