@@ -4,6 +4,11 @@
 - Videos are sent as packets and sent as hls format.
 - Backend deployed in render.com thus it might take 10 - 15 seconds if the app is opened for the first time after a while.
 
+## Environment Variables
+```bash
+NEXT_PUBLIC_API_URL
+```
+
 ## Technology Used -
 
 - Next JS - JS framework
@@ -12,8 +17,8 @@
 - React-hook-form for form Management
 - Yup for Form Validation
 - Cloudinary for Video and Image storage
+<br />
 
 ## More Info - For Personal Use:
-
 - Project deployed in [Vercel](https://vercel.com/dashboard) via Personal Github Acc
 - Backend deployed in [Render](https://dashboard.render.com/) via primary Gmail Account
