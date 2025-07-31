@@ -20,5 +20,5 @@ NEXT_PUBLIC_API_URL
 <br />
 
 ## More Info - For Personal Use:
-- Project deployed in [Vercel](https://vercel.com/dashboard) via Personal Github Acc
-- Backend deployed in [Render](https://dashboard.render.com/) via primary Gmail Account
+- Project deployed on [`Vercel`](https://vercel.com/dashboard) via Personal Github Acc
+- Backend deployed on [`Render`](https://dashboard.render.com/) via primary Gmail Account
