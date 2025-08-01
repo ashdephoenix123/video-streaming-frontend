@@ -9,6 +9,7 @@ import Loading from "../Loading";
 import TextField from "../TextField";
 import UploadVideo from "./UploadVideo";
 import Button from "../Button";
+import { useState } from "react";
 
 const defaultValues = {
   video: null,
@@ -17,6 +18,7 @@ const defaultValues = {
 };
 
 const CreateContent = () => {
+  const [uploadProgress, setUploadProgress] = useState(0);
   const methods = useForm({
     resolver: yupResolver(schema),
     defaultValues,
@@ -49,6 +51,13 @@ const CreateContent = () => {
         headers: {
           "x-title": title,
           "x-user-id": userId,
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(progressEvent);
+          const percentage = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setUploadProgress(percentage);
         },
       });
       if (res.status != 200) {
@@ -94,7 +103,7 @@ const CreateContent = () => {
         <Backdrop>
           <Loading />
           <span className="ml-2 text-lg font-medium">
-            Upload in progress...
+            {uploadProgress}% Upload completed...
           </span>
         </Backdrop>
       )}
