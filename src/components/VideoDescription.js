@@ -96,7 +96,7 @@ const VideoDescription = ({ media }) => {
           <Button
             onClick={likeVideo}
             variant="tertiary"
-            className="items-center gap-1 rounded-full text-xs font-medium self-center py-1.5"
+            className="items-center gap-1 rounded-full text-xs font-medium self-center py-1.5 leading-6"
           >
             <div className="flex items-center gap-1">
               <ThumbsUp size={18} />
@@ -106,7 +106,7 @@ const VideoDescription = ({ media }) => {
           <Button
             onClick={saveVideo}
             variant="tertiary"
-            className="items-center gap-1 rounded-full text-xs font-medium ml-2 self-center py-1.5"
+            className="items-center gap-1 rounded-full text-xs font-medium ml-2 self-center py-1.5 leading-6"
           >
             <div className="flex items-center gap-1">
               <Bookmark size={18} />
