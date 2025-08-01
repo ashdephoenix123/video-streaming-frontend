@@ -9,7 +9,7 @@ const SuggestedVideos = () => {
   let suggested = suggestedVideos.map((vid) => {
     return (
       <div key={vid.id} className="flex gap-2">
-        <div className="relative h-20 lg:24 w-full max-w-32 lg:max-w-40 flex-shrink-0 rounded-lg overflow-hidden">
+        <div className="relative h-20 lg:h-24 lg:24 w-full max-w-32 lg:max-w-40 flex-shrink-0 rounded-lg overflow-hidden">
           <Image
             src="/placeholder.jpg"
             alt="sample-image"
