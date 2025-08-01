@@ -91,7 +91,7 @@ const VideoDescription = ({ media }) => {
           >
             Subscribe
           </Button> */}
-          <div className="ml-auto">
+          <div className="ml-auto flex">
             <Button
               onClick={likeVideo}
               variant="tertiary"
@@ -99,7 +99,7 @@ const VideoDescription = ({ media }) => {
             >
               <div className="flex items-center gap-1">
                 <ThumbsUp size={18} />
-                Like
+                <span className="hidden md:block">Like</span>
               </div>
             </Button>
             <Button
@@ -109,7 +109,7 @@ const VideoDescription = ({ media }) => {
             >
               <div className="flex items-center gap-1">
                 <Bookmark size={18} />
-                Save
+                <span className="hidden md:block">Save</span>
               </div>
             </Button>
           </div>

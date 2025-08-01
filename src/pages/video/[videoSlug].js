@@ -12,8 +12,8 @@ const VideoName = ({ video, error }) => {
   }
 
   return (
-    <div className="grid grid-cols-12 gap-4">
-      <div className="col-span-8 rounded-lg shadow overflow-hidden">
+    <div className="lg:grid lg:grid-cols-12 gap-4">
+      <div className="lg:col-span-8 rounded-lg shadow overflow-hidden">
         <MainVideoPlayer media={video} />
         <VideoDescription media={video} />
       </div>
