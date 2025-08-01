@@ -30,7 +30,11 @@ export default function Home({ allVideos, error }) {
     </Link>
   ));
 
-  return <div className="grid grid-cols-4 gap-x-2 gap-y-8">{videos}</div>;
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-8">
+      {videos}
+    </div>
+  );
 }
 
 export async function getServerSideProps() {

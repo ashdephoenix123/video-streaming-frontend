@@ -62,7 +62,7 @@ const AccountDescription = () => {
 
   return (
     <div className="flex gap-6">
-      <div className="relative group w-[150px] h-[150px]">
+      <div className="relative group w-24 h-24 md:w-[150px] md:h-[150px]">
         <Image
           src={preview}
           alt={`${user?.username}'s avatar`}
@@ -88,7 +88,9 @@ const AccountDescription = () => {
         onChange={mutate}
       />
       <div className="space-y-2 flex flex-col justify-center">
-        <h1 className="text-3xl font-bold tracking-tight">{user?.username}</h1>
+        <h1 className="text-xl md:text-3xl font-bold tracking-tight">
+          {user?.username}
+        </h1>
         <p className="text-xs text-neutral-400">&#x2022; {user?.email} </p>
       </div>
     </div>

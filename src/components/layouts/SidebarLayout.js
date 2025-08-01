@@ -28,7 +28,7 @@ const SideBarLayout = ({ children }) => {
     <div>
       <Navbar />
       <div className="flex gap-4">
-        <div className="basis-36 shrink-0">
+        <div className="basis-36 shrink-0 hidden lg:block">
           <ul className="list-none">{paths}</ul>
         </div>
         <div className="flex-1">{children}</div>

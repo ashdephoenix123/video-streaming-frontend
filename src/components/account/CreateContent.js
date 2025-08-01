@@ -76,7 +76,7 @@ const CreateContent = () => {
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 max-w-md p-4"
+          className="space-y-4 max-w-md lg:p-4"
         >
           <UploadVideo />
 

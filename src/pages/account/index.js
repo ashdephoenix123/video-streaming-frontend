@@ -17,7 +17,7 @@ const Account = () => {
   }
 
   return (
-    <div className="pl-12 space-y-4">
+    <div className="lg:pl-12 space-y-4">
       <AccountDescription />
       <Actions />
     </div>

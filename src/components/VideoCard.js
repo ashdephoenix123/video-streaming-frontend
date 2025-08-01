@@ -40,11 +40,14 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   return (
     <Link
       href={"/video/" + vid?.slug}
-      className="border border-neutral-700 rounded-lg overflow-hidden flex"
+      className="border border-neutral-700 rounded-lg overflow-hidden flex flex-col md:flex-row"
     >
-      <div className="w-80 relative h-44 overflow-hidden">
+      <div className="w-full md:w-80 relative h-44 overflow-hidden">
         {vid.hlsUrl ? (
-          <VideoPlayer src={vid.hlsUrl} className="w-full h-full" />
+          <VideoPlayer
+            src={vid.hlsUrl}
+            className="w-full h-full object-cover"
+          />
         ) : (
           <Image
             src="/placeholder.jpg"
