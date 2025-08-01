@@ -22,6 +22,7 @@ export default function MainVideoPlayer({ media }) {
       }}
     >
       <ReactPlayer
+        autoPlay
         slot="media"
         src={hlsUrl}
         controls={false}
@@ -42,13 +43,12 @@ export default function MainVideoPlayer({ media }) {
         </MediaControlBar>
       </div>
       <MediaControlBar className="hidden lg:flex gap-0">
-        <MediaPlayButton className="p-2" />
-        <MediaMuteButton className="p-2" />
-        <MediaVolumeRange className="p-2 hover:bg-transparent" />
-        <MediaTimeDisplay showDuration className="p-2 hover:bg-transparent" />
-        <div className="flex-1" />
-        <MediaPlaybackRateButton className="p-2" />
-        <MediaFullscreenButton className="p-2" />
+        <MediaPlayButton className="p-2 bg-transparent" />
+        <MediaMuteButton className="p-2 bg-transparent" />
+        <MediaVolumeRange className="p-2 bg-transparent" />
+        <MediaTimeDisplay showDuration className="p-2 bg-transparent" />
+        <MediaPlaybackRateButton className="p-2 bg-transparent ml-auto " />
+        <MediaFullscreenButton className="p-2 bg-transparent" />
       </MediaControlBar>
     </MediaController>
   );
