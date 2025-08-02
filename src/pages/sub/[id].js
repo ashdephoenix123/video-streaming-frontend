@@ -1,8 +1,6 @@
 import { useSubDetails } from "@/axios/api";
-import Actions from "@/components/account/Actions";
 import SubAccountDescription from "@/components/account/SubAccountDescription";
 import SubActions from "@/components/account/SubActions";
-import Loading from "@/components/Loading";
 import { messages } from "@/constants";
 import { getCookie } from "cookies-next/server";
 import { useRouter } from "next/router";
@@ -21,7 +19,6 @@ const Subscription = () => {
 
   return (
     <div className="lg:pl-12 space-y-4">
-      {isFetching && <Loading />}
       {!isFetching && (
         <>
           <SubAccountDescription

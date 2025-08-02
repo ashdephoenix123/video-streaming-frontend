@@ -32,10 +32,18 @@ export default function MainVideoPlayer({ media }) {
           "--controls": "none",
         }}
       ></ReactPlayer>
-
-      <div slot="centered-chrome" className="lg:hidden">
-        <media-play-button></media-play-button>
+      <div slot="top-chrome" className="lg:hidden flex justify-end w-full">
+        <MediaFullscreenButton className="p-2 bg-transparent" />
       </div>
+      <div slot="centered-chrome" className="lg:hidden">
+        <MediaPlayButton className="p-2 bg-transparent" noTooltip />
+      </div>
+      <MediaControlBar className="w-full lg:hidden">
+        <MediaTimeDisplay showDuration className="p-2 bg-transparent" />
+        <MediaTimeRange className="bg-transparent" />
+        <MediaMuteButton className="p-2 bg-transparent" />
+        <MediaPlaybackRateButton className="p-2 bg-transparent ml-auto " />
+      </MediaControlBar>
 
       <div className="hidden lg:block w-full">
         <MediaControlBar className="w-full">
