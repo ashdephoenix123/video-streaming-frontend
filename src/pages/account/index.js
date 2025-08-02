@@ -30,6 +30,7 @@ export async function getServerSideProps({ req, res }) {
   try {
     const token = await getCookie("token", { req, res });
     console.log("accounts page user token", token);
+    console.log("req", req);
     if (!token) {
       return {
         redirect: {
