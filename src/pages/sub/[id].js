@@ -40,9 +40,8 @@ export default Subscription;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    // const token = await getCookie("token", { req, res });
-    const token = req.headers.cookie;
-    console.log("token", token);
+    const token = await getCookie("token", { req, res });
+    console.log("[id] token", token);
 
     if (!token) {
       return {
