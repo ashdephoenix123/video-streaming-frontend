@@ -51,6 +51,19 @@ export const useMySubscriptions = () => {
   });
 };
 
+export const useSubDetails = ({ userId }) => {
+  return useQuery({
+    queryKey: ["sub-details"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `${constants.apiURL}/user/subscribe/getSubscriptionDetail`,
+        { userId }
+      );
+      return response;
+    },
+  });
+};
+
 export const getAllVideos = async () => {
   try {
     const res = await axios.get(`${constants.apiURL}/videos`);
