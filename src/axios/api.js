@@ -2,7 +2,7 @@ import { constants } from "@/constants";
 import axiosToken from "./tokenAxios";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const usePosts = () => {
   return useQuery({
@@ -10,6 +10,31 @@ export const usePosts = () => {
     queryFn: async () => {
       const response = await axios.get(`${constants.apiURL}/videos`);
       return response;
+    },
+  });
+};
+
+export const useSubscriptionStatus = ({ userId }) => {
+  return useQuery({
+    queryKey: ["subscription-status"],
+    queryFn: async () => {
+      const response = await axiosToken.post(
+        `${constants.apiURL}/user/subscribe/getStatus`,
+        { userId }
+      );
+      return response;
+    },
+  });
+};
+
+export const useSubscribe = () => {
+  return useMutation({
+    mutationFn: async ({ userId, subscriberId }) => {
+      const res = await axios.post(`${constants.apiURL}/user/subscribe`, {
+        userId,
+        subscriberId,
+      });
+      return res;
     },
   });
 };

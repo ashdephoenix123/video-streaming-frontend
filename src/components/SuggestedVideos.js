@@ -35,7 +35,7 @@ const SuggestedVideos = () => {
     data.data.map((vid) => {
       if (vid.slug != currentSlug) {
         return (
-          <Link href={vid.slug} key={vid.id} className="flex gap-2">
+          <Link href={vid.slug} key={vid.slug} className="flex gap-2">
             <div className="relative h-20 lg:h-24 lg:24 w-full max-w-32 lg:max-w-40 flex-shrink-0 rounded-lg overflow-hidden">
               {display(vid.hlsUrl)}
             </div>

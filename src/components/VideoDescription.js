@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { Bookmark, ThumbsUp } from "lucide-react";
 import axiosToken from "@/axios/tokenAxios";
@@ -7,11 +7,23 @@ import { constants, messages } from "@/constants";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { useUser } from "@/contexts/UserContext";
-import { saveHistory } from "@/axios/api";
+import { saveHistory, useSubscribe, useSubscriptionStatus } from "@/axios/api";
+import { cn } from "@/lib/utils";
 
 const VideoDescription = ({ media }) => {
   const router = useRouter();
   const { user } = useUser();
+  const { mutate } = useSubscribe();
+  const { data, status } = useSubscriptionStatus({
+    userId: media.userId._id,
+  });
+  const [isSubscribed, setIsSubscribed] = useState(null);
+
+  useEffect(() => {
+    if (status === "success" && data?.data) {
+      setIsSubscribed(data.data.subscribed);
+    }
+  }, [data, status]);
 
   const checkAuth = () => {
     if (!user) router.push("/sign-in");
@@ -61,6 +73,11 @@ const VideoDescription = ({ media }) => {
     }
   };
 
+  const updateSubscription = async () => {
+    setIsSubscribed((prev) => !prev);
+    mutate({ userId: media?.userId._id, subscriberId: user?.userId });
+  };
+
   useEffect(() => {
     if (user?.userId && media?._id) {
       saveHistory(user.userId, media._id);
@@ -85,12 +102,17 @@ const VideoDescription = ({ media }) => {
             </h2>
             <p className="text-neutral-400 text-xs">Subscriber count</p>
           </div>
-          <Button
-            variant="secondary"
-            className="rounded-full text-xs font-medium lg:ml-4 self-center py-1.5 leading-6 ml-auto"
-          >
-            Subscribe
-          </Button>
+          {media?.userId._id !== user?.userId && (
+            <Button
+              onClick={updateSubscription}
+              variant={isSubscribed ? "secondary" : "tertiary"}
+              className={cn(
+                "rounded-full text-xs font-medium lg:ml-4 self-center py-1.5 leading-6 ml-auto"
+              )}
+            >
+              Subscribe{isSubscribed ? "d" : ""}
+            </Button>
+          )}
         </div>
         <div className="flex lg:ml-auto">
           <Button
