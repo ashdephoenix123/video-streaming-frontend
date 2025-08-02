@@ -28,6 +28,7 @@ export default Account;
 export async function getServerSideProps({ req, res }) {
   try {
     const token = cookie.parse(req.headers.cookie)?.token;
+    console.log("token", token);
     if (!token) {
       return {
         redirect: {
