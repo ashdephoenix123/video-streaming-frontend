@@ -1,6 +1,27 @@
 import { constants } from "@/constants";
 import axiosToken from "./tokenAxios";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+
+export const usePosts = () => {
+  return useQuery({
+    queryKey: ["all-videos"],
+    queryFn: async () => {
+      const response = await axios.get(`${constants.apiURL}/videos`);
+      return response;
+    },
+  });
+};
+
+export const getAllVideos = async () => {
+  try {
+    const res = await axios.get(`${constants.apiURL}/videos`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 
 export const getUserVideos = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
