@@ -39,3 +39,8 @@ body {
 #nprogress .spinner {
   display: none !important;
 }
+
+media-time-range {
+  --media-range-thumb-background: red;
+  --media-range-bar-color: red;
+}
