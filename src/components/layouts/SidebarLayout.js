@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Link from "next/link";
 import { routes } from "@/constants";
+import Subscriptions from "../Subscriptions";
 
 const SideBarLayout = ({ children }) => {
   const [active, setActive] = useState("home");
@@ -30,6 +31,7 @@ const SideBarLayout = ({ children }) => {
       <div className="flex gap-4">
         <div className="basis-36 shrink-0 hidden lg:block">
           <ul className="list-none">{paths}</ul>
+          <Subscriptions />
         </div>
         <div className="flex-1">{children}</div>
       </div>
