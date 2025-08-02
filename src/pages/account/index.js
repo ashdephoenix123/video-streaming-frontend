@@ -3,8 +3,7 @@ import Actions from "@/components/account/Actions";
 import Loading from "@/components/Loading";
 import { messages } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
-import { getCookie } from "cookies-next/server";
-import React from "react";
+import * as cookie from "cookie";
 
 const Account = () => {
   const { user } = useUser();
@@ -28,9 +27,7 @@ export default Account;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = await getCookie("token", { req, res });
-    console.log("account token", token);
-
+    const token = cookie.parse(req.headers.cookie)?.token;
     if (!token) {
       return {
         redirect: {

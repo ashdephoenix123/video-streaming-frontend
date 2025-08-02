@@ -2,7 +2,7 @@ import { useSubDetails } from "@/axios/api";
 import SubAccountDescription from "@/components/account/SubAccountDescription";
 import SubActions from "@/components/account/SubActions";
 import { messages } from "@/constants";
-import { getCookie } from "cookies-next/server";
+import * as cookie from "cookie";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -40,9 +40,7 @@ export default Subscription;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = await getCookie("token", { req, res });
-    console.log("[id] token", token);
-
+    const token = cookie.parse(req.headers.cookie)?.token;
     if (!token) {
       return {
         redirect: {

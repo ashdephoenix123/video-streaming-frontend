@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import * as cookie from "cookie";
 
 const SignIn = () => {
   const router = useRouter();
@@ -104,8 +105,7 @@ export default SignIn;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = await getCookie("token", { req, res });
-    console.log("signin token", token);
+    const token = cookie.parse(req.headers.cookie)?.token;
 
     if (token) {
       return {

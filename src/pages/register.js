@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import * as cookie from "cookie";
 
 const Register = () => {
   const methods = useForm({
@@ -112,9 +113,7 @@ export default Register;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = await getCookie("token", { req, res });
-    console.log("register token", token);
-
+    const token = cookie.parse(req.headers.cookie)?.token;
     if (token) {
       return {
         redirect: {
