@@ -55,6 +55,13 @@ export const profileTabs = [
   },
 ];
 
+export const subProfileTabs = [
+  {
+    id: "videos",
+    label: "Videos",
+  },
+];
+
 export const messages = {
   error: "Something went wrong",
 };

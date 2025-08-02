@@ -1,16 +1,9 @@
-import { getUserVideos } from "@/axios/api";
-import { useQuery } from "@tanstack/react-query";
 import { formatDistance } from "date-fns";
 import Link from "next/link";
 import Loading from "../Loading";
 import VideoPlayer from "../VideoPlayer";
 
-const MyVideos = () => {
-  const { isPending, error, data } = useQuery({
-    queryKey: ["user-uploaded-videos"],
-    queryFn: getUserVideos,
-  });
-
+const SubVideos = ({ data }) => {
   const videos = data?.map((video) => (
     <Link key={video._id} href={`/video/${video.slug}`} className="space-y-1">
       <div>
@@ -24,14 +17,6 @@ const MyVideos = () => {
       </p>
     </Link>
   ));
-
-  if (isPending) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <p>Something went wrong!</p>;
-  }
 
   const renderVideos = (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -47,4 +32,4 @@ const MyVideos = () => {
   return <div>{videos.length > 0 ? renderVideos : noVideoMessage}</div>;
 };
 
-export default MyVideos;
+export default SubVideos;

@@ -2,7 +2,7 @@ import { constants } from "@/constants";
 import axiosToken from "./tokenAxios";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const usePosts = () => {
   return useQuery({
@@ -27,7 +27,9 @@ export const useSubscriptionStatus = ({ userId }) => {
   });
 };
 
-export const useSubscribe = () => {
+export const useSubscribe = (callback) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async ({ userId, subscriberId }) => {
       const res = await axios.post(`${constants.apiURL}/user/subscribe`, {
@@ -35,6 +37,12 @@ export const useSubscribe = () => {
         subscriberId,
       });
       return res;
+    },
+    onSuccess: (res) => {
+      res.status === 201 ? callback(true) : callback(false);
+      queryClient.invalidateQueries({
+        queryKey: ["my-subscriptions"],
+      });
     },
   });
 };
@@ -53,14 +61,15 @@ export const useMySubscriptions = () => {
 
 export const useSubDetails = ({ userId }) => {
   return useQuery({
-    queryKey: ["sub-details"],
+    queryKey: ["sub-details", userId],
     queryFn: async () => {
-      const response = await axios.get(
+      const response = await axios.post(
         `${constants.apiURL}/user/subscribe/getSubscriptionDetail`,
         { userId }
       );
       return response;
     },
+    enabled: !!userId,
   });
 };
 

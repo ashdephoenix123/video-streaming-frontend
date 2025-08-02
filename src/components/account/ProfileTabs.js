@@ -1,8 +1,7 @@
-import { profileTabs } from "@/constants";
 import { cn } from "@/lib/utils";
 import React from "react";
 
-const ProfileTabs = ({ active, updateActiveTab }) => {
+const ProfileTabs = ({ active, updateActiveTab, profileTabs }) => {
   let allTabs = profileTabs.map((tab) => (
     <li key={tab.id} class="me-2">
       <div

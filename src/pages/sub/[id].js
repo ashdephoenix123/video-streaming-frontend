@@ -1,32 +1,40 @@
 import { useSubDetails } from "@/axios/api";
-import AccountDescription from "@/components/account/AccountDescription";
 import Actions from "@/components/account/Actions";
+import SubAccountDescription from "@/components/account/SubAccountDescription";
+import SubActions from "@/components/account/SubActions";
 import Loading from "@/components/Loading";
 import { messages } from "@/constants";
-import { useUser } from "@/contexts/UserContext";
 import { getCookie } from "cookies-next/server";
 import { useRouter } from "next/router";
-import React from "react";
+import { useEffect, useState } from "react";
 
 const Subscription = () => {
-  const { query } = useRouter();
-  const accID = query.id;
+  const { query, isReady } = useRouter();
+  const [accID, setAccID] = useState(null);
   const { data, isFetching } = useSubDetails({ userId: accID });
-  console.log(isFetching, data);
 
-  const { user } = useUser();
-  if (!user) {
-    return (
-      <div className="w-full flex justify-center">
-        <Loading size={32} />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (isReady && query.id) {
+      setAccID(query.id);
+    }
+  }, [isReady, query.id]);
 
   return (
     <div className="lg:pl-12 space-y-4">
-      <AccountDescription />
-      <Actions />
+      {isFetching && <Loading />}
+      {!isFetching && (
+        <>
+          <SubAccountDescription
+            user={{
+              username: data?.data.user.username,
+              email: data?.data.user.email,
+              userId: data?.data.user._id,
+            }}
+            preview={data?.data.user.avatarURL}
+          />
+          {data?.data.videos && <SubActions videos={data?.data.videos} />}
+        </>
+      )}
     </div>
   );
 };

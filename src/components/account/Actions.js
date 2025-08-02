@@ -4,6 +4,7 @@ import ProfileHome from "./ProfileHome";
 import MyVideos from "./MyVideos";
 import CreateContent from "./CreateContent";
 import { useRouter } from "next/router";
+import { profileTabs } from "@/constants";
 
 const Actions = () => {
   const router = useRouter();
@@ -36,7 +37,11 @@ const Actions = () => {
 
   return (
     <div className="space-y-4 mb-6">
-      <ProfileTabs active={active} updateActiveTab={updateActiveTab} />
+      <ProfileTabs
+        active={active}
+        updateActiveTab={updateActiveTab}
+        profileTabs={profileTabs}
+      />
       <div>{activeContent()}</div>
     </div>
   );

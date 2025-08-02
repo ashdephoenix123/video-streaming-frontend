@@ -4,7 +4,6 @@ import Link from "next/link";
 
 const Subscriptions = () => {
   const { data } = useMySubscriptions();
-  console.log(data?.data);
 
   let paths = data?.data.map((user) => {
     const { avatarURL, username, _id } = user.userId;
@@ -15,7 +14,7 @@ const Subscriptions = () => {
       >
         <Link
           className="flex items-center gap-2 px-2 py-1"
-          href={"/subscription/" + _id}
+          href={"/sub/" + _id}
         >
           <Image
             src={avatarURL}
