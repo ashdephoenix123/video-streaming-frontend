@@ -44,7 +44,7 @@ const MyVideos = () => {
     </p>
   );
 
-  return <div>{videos.length > 0 ? renderVideos : noVideoMessage}</div>;
+  return <div>{videos?.length > 0 ? renderVideos : noVideoMessage}</div>;
 };
 
 export default MyVideos;
