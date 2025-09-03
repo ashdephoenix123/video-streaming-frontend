@@ -74,6 +74,10 @@ const VideoDescription = ({ media }) => {
   };
 
   const updateSubscription = async () => {
+    if (!user) {
+      checkAuth();
+      return;
+    }
     setIsSubscribed((prev) => !prev);
     mutate({ userId: media?.userId._id, subscriberId: user?.userId });
   };

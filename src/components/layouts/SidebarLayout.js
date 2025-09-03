@@ -4,10 +4,14 @@ import Link from "next/link";
 import { routes } from "@/constants";
 import Subscriptions from "../Subscriptions";
 import { useUser } from "@/contexts/UserContext";
+import { useRouter } from "next/router";
 
 const SideBarLayout = ({ children }) => {
   const [active, setActive] = useState("home");
   const { user } = useUser();
+  const router = useRouter();
+
+  const currentPath = router?.route || "";
 
   let paths = routes.map((route) => {
     const { icon: Icon, label } = route;
@@ -15,7 +19,7 @@ const SideBarLayout = ({ children }) => {
       <li
         key={route.id}
         className={`text-xs  rounded-lg font-medium cursor-pointer hover:bg-neutral-600/40 hover:transition-all active:bg-neutral-600/30 select-none ${
-          route.id === active ? "bg-neutral-600/40" : ""
+          route.href.split("?")[0] === currentPath ? "bg-neutral-600/40" : ""
         }`}
         onClick={() => setActive(route.id)}
       >
