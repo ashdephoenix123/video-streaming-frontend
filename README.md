@@ -2,7 +2,7 @@
 
 ## Tech Note -
 - Videos are sent as packets and sent as hls format.
-- Backend deployed in render.com thus it might take 10 - 15 seconds if the app is opened for the first time after a while.
+- Backend deployed in Google Cloud Platform.
 
 ## Environment Variables
 ```bash
@@ -21,4 +21,4 @@ NEXT_PUBLIC_API_URL
 
 ## More Info - For Personal Use:
 - Project deployed on [`Vercel`](https://vercel.com/dashboard) via Personal Github Acc
-- Backend deployed on [`Render`](https://dashboard.render.com/) via primary Gmail Account
+- Backend deployed on [`GCP`](https://console.cloud.google.com/) via official Gmail Account
