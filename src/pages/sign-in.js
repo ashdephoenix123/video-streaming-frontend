@@ -11,7 +11,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import * as cookie from "cookie";
 
 const SignIn = () => {
   const router = useRouter();
@@ -105,7 +104,7 @@ export default SignIn;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = cookie.parse(req.headers.cookie)?.token;
+    const token = getCookie("token", { req, res });
 
     if (token) {
       return {
@@ -120,8 +119,9 @@ export async function getServerSideProps({ req, res }) {
       props: {},
     };
   } catch (error) {
+    console.error("GSSP Error (Signin):", error);
     return {
-      props: { error: messages.error },
+      props: {},
     };
   }
 }

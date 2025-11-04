@@ -1,9 +1,8 @@
 import AccountDescription from "@/components/account/AccountDescription";
 import Actions from "@/components/account/Actions";
 import Loading from "@/components/Loading";
-import { messages } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
-import * as cookie from "cookie";
+import { getCookie } from "cookies-next/server";
 
 const Account = () => {
   const { user } = useUser();
@@ -27,9 +26,7 @@ export default Account;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    console.log(req.headers.cookie);
-    console.log(cookie.parse(req.headers.cookie));
-    const token = cookie.parse(req.headers.cookie)?.token;
+    const token = getCookie("token", { req, res });
     if (!token) {
       return {
         redirect: {
@@ -42,11 +39,9 @@ export async function getServerSideProps({ req, res }) {
       props: {},
     };
   } catch (error) {
-    console.log(error);
+    console.error("GSSP Error (account):", error);
     return {
-      props: {
-        error,
-      },
+      props: {},
     };
   }
 }

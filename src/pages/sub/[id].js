@@ -1,8 +1,7 @@
 import { useSubDetails } from "@/axios/api";
 import SubAccountDescription from "@/components/account/SubAccountDescription";
 import SubActions from "@/components/account/SubActions";
-import { messages } from "@/constants";
-import * as cookie from "cookie";
+import { getCookie } from "cookies-next/server";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -40,7 +39,7 @@ export default Subscription;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = cookie.parse(req.headers.cookie)?.token;
+    const token = getCookie("token", { req, res });
     if (!token) {
       return {
         redirect: {
@@ -54,10 +53,9 @@ export async function getServerSideProps({ req, res }) {
       props: {},
     };
   } catch (error) {
+    console.error("GSSP Error ([id]]):", error);
     return {
-      props: {
-        error: messages.error,
-      },
+      props: {},
     };
   }
 }
