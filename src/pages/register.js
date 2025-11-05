@@ -112,7 +112,7 @@ export default Register;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = getCookie("token", { req, res });
+    const token = await getCookie("token", { req, res });
     if (token) {
       return {
         redirect: {

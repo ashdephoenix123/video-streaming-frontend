@@ -104,7 +104,8 @@ export default SignIn;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = getCookie("token", { req, res });
+    const token = await getCookie("token", { req, res });
+    console.log("token", token);
 
     if (token) {
       return {
