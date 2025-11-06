@@ -1,17 +1,16 @@
-import axiosToken from "@/axios/tokenAxios";
-import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
 import { useRouter } from "next/router";
 import Button from "../Button";
+import axios from "axios";
 
 const ProfileHome = () => {
   const router = useRouter();
   const { logout } = useUser();
 
   const loguserOut = async () => {
-    await axiosToken.post(constants.apiURL + "/user/logout", {});
+    await axios.post("/api/next-logout", {});
     await logout();
-    router.push("sign-in");
+    router.push("/sign-in");
   };
   return (
     <div className="flex flex-col gap-4">

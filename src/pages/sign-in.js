@@ -30,18 +30,13 @@ const SignIn = () => {
     const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post(constants.apiURL + "/user/login", body, {
-        withCredentials: true,
+      const res = await axios.post("/api/next-login", body, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if (res.status != 200) {
-        console.log("signin failed");
-      } else {
-        await addUserData(res.data);
-        router.push("/account");
-      }
+      await addUserData(res.data);
+      router.push("/account");
     } catch (error) {
       console.log(error);
       const msg = error.response.data.message || messages.error;
