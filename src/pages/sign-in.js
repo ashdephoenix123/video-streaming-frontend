@@ -1,12 +1,11 @@
 import Button from "@/components/Button";
 import Layout from "@/components/layouts";
 import TextField from "@/components/TextField";
-import { constants, messages } from "@/constants";
+import { messages } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
 import { loginSchema } from "@/schema/loginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import { getCookie } from "cookies-next/server";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
@@ -99,18 +98,6 @@ export default SignIn;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = await getCookie("token", { req, res });
-    console.log("token", token);
-
-    if (token) {
-      return {
-        redirect: {
-          destination: "/account",
-          permanent: false,
-        },
-      };
-    }
-
     return {
       props: {},
     };

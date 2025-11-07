@@ -1,7 +1,6 @@
 import { useSubDetails } from "@/axios/api";
 import SubAccountDescription from "@/components/account/SubAccountDescription";
 import SubActions from "@/components/account/SubActions";
-import { getCookie } from "cookies-next/server";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -39,16 +38,6 @@ export default Subscription;
 
 export async function getServerSideProps({ req, res }) {
   try {
-    const token = await getCookie("token", { req, res });
-    if (!token) {
-      return {
-        redirect: {
-          destination: "/sign-in",
-          permanent: false,
-        },
-      };
-    }
-
     return {
       props: {},
     };

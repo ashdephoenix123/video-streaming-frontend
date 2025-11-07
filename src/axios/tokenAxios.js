@@ -1,8 +1,8 @@
-import { constants } from "@/constants";
 import axios from "axios";
 
 const axiosToken = axios.create({
-  baseURL: constants.apiURL,
+  // baseURL: constants.apiURL,
+  baseURL: "/api/proxy",
   withCredentials: true,
 });
 
