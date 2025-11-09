@@ -9,8 +9,6 @@ export default async function handler(req, res) {
     // 2. Rebuild the real backend URL
     const path = req.query.slug.join("/");
     const backendUrl = `${constants.apiURL}/${path}`;
-    console.log(1, path);
-    console.log(backendUrl);
 
     // 3. Prepare the headers
     const headers = {

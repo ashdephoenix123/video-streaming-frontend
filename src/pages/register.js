@@ -1,10 +1,9 @@
+import axiosToken from "@/axios/tokenAxios";
 import Button from "@/components/Button";
 import Layout from "@/components/layouts";
 import TextField from "@/components/TextField";
-import { constants } from "@/constants";
 import { registerSchema } from "@/schema/registerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
@@ -28,7 +27,7 @@ const Register = () => {
     const body = JSON.stringify(rest);
 
     try {
-      const res = await axios.post(constants.apiURL + "/user/register", body, {
+      const res = await axiosToken.post("/user/register", body, {
         headers: {
           "Content-Type": "application/json",
         },

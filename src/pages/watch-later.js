@@ -1,13 +1,13 @@
 import { likeVideo } from "@/axios/api";
+import axiosToken from "@/axios/tokenAxios";
 import SignedOutUI from "@/components/signed-out/SavedVideos";
 import VideoCard from "@/components/VideoCard";
 import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
 
 const menuItems = [{ icon: Trash2, label: "Remove", id: "save" }];
 
@@ -69,8 +69,8 @@ export default WatchLater;
 
 export async function getServerSideProps({ req }) {
   try {
-    const response = await axios.get(
-      constants.apiURL + "/user/savedVideos/user",
+    const response = await axiosToken.get(
+      constants.frontendURL + "/user/savedVideos/user",
       {
         headers: {
           Cookie: req.headers.cookie,

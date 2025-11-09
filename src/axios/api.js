@@ -1,14 +1,12 @@
-import { constants } from "@/constants";
-import axiosToken from "./tokenAxios";
-import toast from "react-hot-toast";
-import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import axiosToken from "./tokenAxios";
 
 export const usePosts = () => {
   return useQuery({
     queryKey: ["all-videos"],
     queryFn: async () => {
-      const response = await axios.get(`${constants.apiURL}/videos`);
+      const response = await axiosToken.get(`/videos`);
       return response;
     },
   });
@@ -18,10 +16,9 @@ export const useSubscriptionStatus = ({ userId }) => {
   return useQuery({
     queryKey: ["subscription-status"],
     queryFn: async () => {
-      const response = await axiosToken.post(
-        `${constants.apiURL}/user/subscribe/getStatus`,
-        { userId }
-      );
+      const response = await axiosToken.post(`/user/subscribe/getStatus`, {
+        userId,
+      });
       return response;
     },
   });
@@ -32,7 +29,7 @@ export const useSubscribe = (callback) => {
 
   return useMutation({
     mutationFn: async ({ userId, subscriberId }) => {
-      const res = await axios.post(`${constants.apiURL}/user/subscribe`, {
+      const res = await axiosToken.post(`/user/subscribe`, {
         userId,
         subscriberId,
       });
@@ -51,9 +48,7 @@ export const useMySubscriptions = () => {
   return useQuery({
     queryKey: ["my-subscriptions"],
     queryFn: async () => {
-      const response = await axiosToken.get(
-        `${constants.apiURL}/user/subscribe/mySubscriptions`
-      );
+      const response = await axiosToken.get(`/user/subscribe/mySubscriptions`);
       return response;
     },
   });
@@ -63,8 +58,8 @@ export const useSubDetails = ({ userId }) => {
   return useQuery({
     queryKey: ["sub-details", userId],
     queryFn: async () => {
-      const response = await axios.post(
-        `${constants.apiURL}/user/subscribe/getSubscriptionDetail`,
+      const response = await axiosToken.post(
+        `/user/subscribe/getSubscriptionDetail`,
         { userId }
       );
       return response;
@@ -75,7 +70,7 @@ export const useSubDetails = ({ userId }) => {
 
 export const getAllVideos = async () => {
   try {
-    const res = await axios.get(`${constants.apiURL}/videos`);
+    const res = await axiosToken.get(`/videos`);
     return res.data;
   } catch (error) {
     return error;
@@ -84,9 +79,7 @@ export const getAllVideos = async () => {
 
 export const getUserVideos = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const response = await axiosToken.get(
-    constants.apiURL + `/user/videos/${user.userId}`
-  );
+  const response = await axiosToken.get(`/user/videos/${user.userId}`);
   return response.data;
 };
 
@@ -94,10 +87,7 @@ export const getUserVideos = async () => {
 export const likeVideo = async (userId, mediaId, action, router) => {
   try {
     const body = { userId, mediaId, action };
-    const res = await axiosToken.post(
-      constants.apiURL + `/user/likeOrSave`,
-      body
-    );
+    const res = await axiosToken.post(`/user/likeOrSave`, body);
 
     if (res.status === 200) {
       toast.success(res.data.message);
@@ -115,7 +105,7 @@ export const likeVideo = async (userId, mediaId, action, router) => {
 export const saveHistory = async (userId, videoId) => {
   try {
     if (!userId) return;
-    await axiosToken.post(constants.apiURL + `/user/history/`, {
+    await axiosToken.post(`/user/history/`, {
       userId,
       videoId,
     });

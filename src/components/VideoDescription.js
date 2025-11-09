@@ -1,14 +1,13 @@
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import Button from "./Button";
-import { Bookmark, ThumbsUp } from "lucide-react";
-import axiosToken from "@/axios/tokenAxios";
-import { constants, messages } from "@/constants";
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import { useUser } from "@/contexts/UserContext";
 import { saveHistory, useSubscribe, useSubscriptionStatus } from "@/axios/api";
+import axiosToken from "@/axios/tokenAxios";
+import { useUser } from "@/contexts/UserContext";
 import { cn } from "@/lib/utils";
+import { Bookmark, ThumbsUp } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import Button from "./Button";
 
 const VideoDescription = ({ media }) => {
   const router = useRouter();
@@ -33,10 +32,7 @@ const VideoDescription = ({ media }) => {
     checkAuth();
     try {
       const body = { userId: user.userId, mediaId: media._id, action: "like" };
-      const res = await axiosToken.post(
-        constants.apiURL + `/user/likeOrSave`,
-        body
-      );
+      const res = await axiosToken.post(`/user/likeOrSave`, body);
 
       if (res.status === 200) {
         console.log(res);
@@ -56,10 +52,7 @@ const VideoDescription = ({ media }) => {
     checkAuth();
     try {
       const body = { userId: user.userId, mediaId: media._id, action: "save" };
-      const res = await axiosToken.post(
-        constants.apiURL + `/user/likeOrSave`,
-        body
-      );
+      const res = await axiosToken.post(`/user/likeOrSave`, body);
 
       if (res.status === 200) {
         toast.success(res.data.message);

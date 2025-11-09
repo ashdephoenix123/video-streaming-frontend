@@ -1,5 +1,4 @@
 import axiosToken from "@/axios/tokenAxios";
-import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
@@ -32,7 +31,7 @@ const AccountDescription = () => {
         const formData = new FormData();
         formData.append("avatar", file);
         const response = await axiosToken.post(
-          constants.apiURL + "/user/upload-avatar",
+          "/user/upload-avatar",
           formData,
           {
             headers: {
@@ -51,9 +50,7 @@ const AccountDescription = () => {
       }
     },
     onSuccess: async () => {
-      const getUser = await axiosToken.get(
-        constants.apiURL + `/user/${user?.userId}`
-      );
+      const getUser = await axiosToken.get(`/user/${user?.userId}`);
       await addUserData(getUser.data);
       // Invalidate and refetch the 'todos' query after successful mutation
       // queryClient.invalidateQueries({ queryKey: ["todos"] });

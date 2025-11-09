@@ -1,15 +1,14 @@
-import { constants } from "@/constants";
 import { schema } from "@/schema/validationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Backdrop from "../Backdrop";
+import Button from "../Button";
 import Loading from "../Loading";
 import TextField from "../TextField";
 import UploadVideo from "./UploadVideo";
-import Button from "../Button";
-import { useState } from "react";
+import axiosToken from "@/axios/tokenAxios";
 
 const defaultValues = {
   video: null,
@@ -46,7 +45,7 @@ const CreateContent = () => {
     formData.append("userId", userId);
 
     try {
-      const res = await axios.post(`${constants.apiURL}/upload`, formData, {
+      const res = await axiosToken.post(`/upload`, formData, {
         withCredentials: true,
         headers: {
           "x-title": title,

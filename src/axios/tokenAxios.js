@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const axiosToken = axios.create({
-  // baseURL: constants.apiURL,
   baseURL: "/api/proxy",
-  withCredentials: true,
 });
 
 axiosToken.interceptors.request.use(

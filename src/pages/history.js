@@ -1,10 +1,10 @@
 import { removeVidFromHistory } from "@/axios/api";
+import axiosToken from "@/axios/tokenAxios";
 import SignedOutUI from "@/components/signed-out/history";
 import VideoCard from "@/components/VideoCard";
 import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -67,12 +67,15 @@ export default History;
 
 export async function getServerSideProps({ req }) {
   try {
-    const response = await axios.get(constants.apiURL + "/user/history/user", {
-      headers: {
-        Cookie: req.headers.cookie,
-      },
-      withCredentials: true,
-    });
+    const response = await axiosToken.get(
+      constants.frontendURL + "/user/history/user",
+      {
+        headers: {
+          Cookie: req.headers.cookie,
+        },
+        withCredentials: true,
+      }
+    );
 
     return {
       props: {

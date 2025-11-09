@@ -1,10 +1,9 @@
+import axiosToken from "@/axios/tokenAxios";
 import Layout from "@/components/layouts";
 import MainVideoPlayer from "@/components/MainVideoPlayer";
 import SuggestedVideos from "@/components/SuggestedVideos";
 import VideoDescription from "@/components/VideoDescription";
 import { constants } from "@/constants";
-import axios from "axios";
-import React from "react";
 
 const VideoName = ({ video, error }) => {
   if (error) {
@@ -30,8 +29,8 @@ VideoName.getLayout = function getLayout(page) {
 
 export async function getServerSideProps({ params }) {
   try {
-    const path = `${constants.apiURL}/video/${params.videoSlug}`;
-    const res = await axios.get(path);
+    const path = constants.frontendURL + `/video/${params.videoSlug}`;
+    const res = await axiosToken.get(path);
     return { props: { video: res.data } };
   } catch (error) {
     console.log(error);

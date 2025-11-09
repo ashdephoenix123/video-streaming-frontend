@@ -1,6 +1,6 @@
+import axiosToken from "@/axios/tokenAxios";
 import VideoPlayer from "@/components/VideoPlayer";
 import { constants } from "@/constants";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,12 +39,13 @@ export default function Home({ allVideos, error }) {
 
 export async function getServerSideProps() {
   try {
-    const res = await axios.get(`${constants.apiURL}/videos`);
+    const res = await axiosToken.get(constants.frontendURL + `/videos`);
     if (res.status != 200) {
       throw new Error("Error fetching videos");
     }
     return { props: { allVideos: res.data } };
   } catch (error) {
+    console.log(error);
     return { props: { error: "Failed to Fetch!" } };
   }
 }
