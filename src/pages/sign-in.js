@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import Layout from "@/components/layouts";
 import TextField from "@/components/TextField";
-import { messages } from "@/constants";
+import { messages, constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
 import { loginSchema } from "@/schema/loginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -29,10 +29,11 @@ const SignIn = () => {
     const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post("/api/next-login", body, {
+      const res = await axios.post(`/api/user/login`, body, {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       });
       await addUserData(res.data);
       router.push("/account");
@@ -95,16 +96,3 @@ SignIn.getLayout = function getLayout(page) {
 };
 
 export default SignIn;
-
-export async function getServerSideProps({ req, res }) {
-  try {
-    return {
-      props: {},
-    };
-  } catch (error) {
-    console.error("GSSP Error (Signin):", error);
-    return {
-      props: {},
-    };
-  }
-}

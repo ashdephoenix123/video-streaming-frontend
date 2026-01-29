@@ -4,6 +4,7 @@ import MainVideoPlayer from "@/components/MainVideoPlayer";
 import SuggestedVideos from "@/components/SuggestedVideos";
 import VideoDescription from "@/components/VideoDescription";
 import { constants } from "@/constants";
+import { getSSRBaseURL } from "@/lib/ssr_baseURL";
 
 const VideoName = ({ video, error }) => {
   if (error) {
@@ -27,9 +28,10 @@ VideoName.getLayout = function getLayout(page) {
   return <Layout variant="clean">{page}</Layout>;
 };
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   try {
-    const path = constants.frontendURL + `/video/${params.videoSlug}`;
+    const baseURL = getSSRBaseURL(req);
+    const path = baseURL + `/api/video/${params.videoSlug}`;
     const res = await axiosToken.get(path);
     return { props: { video: res.data } };
   } catch (error) {

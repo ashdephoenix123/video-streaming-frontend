@@ -27,7 +27,7 @@ const Register = () => {
     const body = JSON.stringify(rest);
 
     try {
-      const res = await axiosToken.post("/user/register", body, {
+      const res = await axiosToken.post("/api/user/register", body, {
         headers: {
           "Content-Type": "application/json",
         },

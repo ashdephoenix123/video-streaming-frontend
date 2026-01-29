@@ -4,7 +4,6 @@ export const projectName = "FlixStream";
 
 export const constants = {
   apiURL: process.env.NEXT_PUBLIC_API_URL,
-  frontendURL: process.env.NEXT_PUBLIC_FRONTEND_URL,
 };
 
 export const routes = [

@@ -1,12 +1,13 @@
+import { constants } from "@/constants";
 import axios from "axios";
 
 const axiosToken = axios.create({
-  baseURL: "/api/proxy",
+  withCredentials: true,
 });
 
 axiosToken.interceptors.request.use(
   (config) => {
-    if (!config.headers["Content-Type"]) {
+    if (!config.headers["Content-Type"] && !(config.data instanceof FormData)) {
       config.headers["Content-Type"] = "application/json";
     }
 
@@ -14,7 +15,7 @@ axiosToken.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosToken;

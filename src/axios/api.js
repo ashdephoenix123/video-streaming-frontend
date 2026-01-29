@@ -6,7 +6,7 @@ export const usePosts = () => {
   return useQuery({
     queryKey: ["all-videos"],
     queryFn: async () => {
-      const response = await axiosToken.get(`/videos`);
+      const response = await axiosToken.get(`/api/videos`);
       return response;
     },
   });
@@ -16,7 +16,7 @@ export const useSubscriptionStatus = ({ userId }) => {
   return useQuery({
     queryKey: ["subscription-status"],
     queryFn: async () => {
-      const response = await axiosToken.post(`/user/subscribe/getStatus`, {
+      const response = await axiosToken.post(`/api/user/subscribe/getStatus`, {
         userId,
       });
       return response;
@@ -29,7 +29,7 @@ export const useSubscribe = (callback) => {
 
   return useMutation({
     mutationFn: async ({ userId, subscriberId }) => {
-      const res = await axiosToken.post(`/user/subscribe`, {
+      const res = await axiosToken.post(`/api/user/subscribe`, {
         userId,
         subscriberId,
       });
@@ -48,7 +48,9 @@ export const useMySubscriptions = () => {
   return useQuery({
     queryKey: ["my-subscriptions"],
     queryFn: async () => {
-      const response = await axiosToken.get(`/user/subscribe/mySubscriptions`);
+      const response = await axiosToken.get(
+        `/api/user/subscribe/mySubscriptions`,
+      );
       return response;
     },
   });
@@ -59,8 +61,8 @@ export const useSubDetails = ({ userId }) => {
     queryKey: ["sub-details", userId],
     queryFn: async () => {
       const response = await axiosToken.post(
-        `/user/subscribe/getSubscriptionDetail`,
-        { userId }
+        `/api/user/subscribe/getSubscriptionDetail`,
+        { userId },
       );
       return response;
     },
@@ -70,7 +72,7 @@ export const useSubDetails = ({ userId }) => {
 
 export const getAllVideos = async () => {
   try {
-    const res = await axiosToken.get(`/videos`);
+    const res = await axiosToken.get(`/api/videos`);
     return res.data;
   } catch (error) {
     return error;
@@ -79,7 +81,7 @@ export const getAllVideos = async () => {
 
 export const getUserVideos = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const response = await axiosToken.get(`/user/videos/${user.userId}`);
+  const response = await axiosToken.get(`/api/user/videos/${user.userId}`);
   return response.data;
 };
 
@@ -87,7 +89,7 @@ export const getUserVideos = async () => {
 export const likeVideo = async (userId, mediaId, action, router) => {
   try {
     const body = { userId, mediaId, action };
-    const res = await axiosToken.post(`/user/likeOrSave`, body);
+    const res = await axiosToken.post(`/api/user/likeOrSave`, body);
 
     if (res.status === 200) {
       toast.success(res.data.message);
@@ -105,7 +107,7 @@ export const likeVideo = async (userId, mediaId, action, router) => {
 export const saveHistory = async (userId, videoId) => {
   try {
     if (!userId) return;
-    await axiosToken.post(`/user/history/`, {
+    await axiosToken.post(`/api/user/history/`, {
       userId,
       videoId,
     });
@@ -115,13 +117,13 @@ export const saveHistory = async (userId, videoId) => {
 };
 
 export const fetchHistory = async () => {
-  const res = await axiosToken.get(`/user/history/user`);
+  const res = await axiosToken.get(`/api/user/history/user`);
   return res;
 };
 
 export const removeVidFromHistory = async (videoId) => {
   try {
-    await axiosToken.post(`/user/history/remove`, {
+    await axiosToken.post(`/api/user/history/remove`, {
       videoId,
     });
   } catch (error) {
