@@ -1,6 +1,7 @@
 import axiosToken from "@/axios/tokenAxios";
 import VideoPlayer from "@/components/VideoPlayer";
 import { constants } from "@/constants";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,9 +38,9 @@ export default function Home({ allVideos, error }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   try {
-    const res = await axiosToken.get(constants.frontendURL + `/videos`);
+    const res = await axios.get(constants.apiURL + `/videos`);
     if (res.status != 200) {
       throw new Error("Error fetching videos");
     }

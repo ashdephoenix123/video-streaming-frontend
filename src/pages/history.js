@@ -67,15 +67,12 @@ export default History;
 
 export async function getServerSideProps({ req }) {
   try {
-    const response = await axiosToken.get(
-      constants.frontendURL + "/user/history/user",
-      {
-        headers: {
-          Cookie: req.headers.cookie,
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await axiosToken.get("/user/history/user", {
+      headers: {
+        Cookie: req.headers.cookie,
+      },
+      withCredentials: true,
+    });
 
     return {
       props: {

@@ -60,7 +60,7 @@ export const useSubDetails = ({ userId }) => {
     queryFn: async () => {
       const response = await axiosToken.post(
         `/user/subscribe/getSubscriptionDetail`,
-        { userId }
+        { userId },
       );
       return response;
     },

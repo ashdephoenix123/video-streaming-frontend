@@ -74,13 +74,13 @@ export default LikedVideos;
 export async function getServerSideProps({ req }) {
   try {
     const response = await axiosToken.get(
-      constants.frontendURL + "/user/likedVideos/user",
+      constants.apiURL + "/user/likedVideos/user",
       {
         headers: {
           Cookie: req.headers.cookie,
         },
         withCredentials: true,
-      }
+      },
     );
 
     return {

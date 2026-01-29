@@ -1,7 +1,9 @@
+import { constants } from "@/constants";
 import axios from "axios";
 
 const axiosToken = axios.create({
-  baseURL: "/api/proxy",
+  baseURL: constants.apiURL,
+  withCredentials: true,
 });
 
 axiosToken.interceptors.request.use(
@@ -14,7 +16,7 @@ axiosToken.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosToken;

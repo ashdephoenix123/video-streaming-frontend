@@ -69,15 +69,12 @@ export default WatchLater;
 
 export async function getServerSideProps({ req }) {
   try {
-    const response = await axiosToken.get(
-      constants.frontendURL + "/user/savedVideos/user",
-      {
-        headers: {
-          Cookie: req.headers.cookie,
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await axiosToken.get("/user/savedVideos/user", {
+      headers: {
+        Cookie: req.headers.cookie,
+      },
+      withCredentials: true,
+    });
 
     return {
       props: {
