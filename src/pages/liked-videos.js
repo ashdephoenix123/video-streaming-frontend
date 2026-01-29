@@ -4,6 +4,7 @@ import SignedOutUI from "@/components/signed-out/LikedVideos";
 import VideoCard from "@/components/VideoCard";
 import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
+import { getSSRBaseURL } from "@/lib/ssr_baseURL";
 import { useMutation } from "@tanstack/react-query";
 import { Timer, Trash2 } from "lucide-react";
 import { useRouter } from "next/router";
@@ -73,8 +74,9 @@ export default LikedVideos;
 
 export async function getServerSideProps({ req }) {
   try {
+    const baseURL = getSSRBaseURL(req);
     const response = await axiosToken.get(
-      constants.apiURL + "/user/likedVideos/user",
+      baseURL + "/api/user/likedVideos/user",
       {
         headers: {
           Cookie: req.headers.cookie,

@@ -8,7 +8,7 @@ const ProfileHome = () => {
   const { logout } = useUser();
 
   const loguserOut = async () => {
-    await axios.post("/api/next-logout", {});
+    await axios.post("/api/user/logout", {});
     await logout();
     router.push("/sign-in");
   };

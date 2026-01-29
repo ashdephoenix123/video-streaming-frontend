@@ -29,7 +29,7 @@ const SignIn = () => {
     const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post(`${constants.apiURL}/user/login`, body, {
+      const res = await axios.post(`/api/user/login`, body, {
         headers: {
           "Content-Type": "application/json",
         },

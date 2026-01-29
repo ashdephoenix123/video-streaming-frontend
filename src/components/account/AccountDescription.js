@@ -12,7 +12,7 @@ const AccountDescription = () => {
   const { user, addUserData } = useUser();
   const imgRef = useRef(null);
   const [preview, setPreview] = useState(
-    user && user?.avatarURL ? user.avatarURL : "/default-user.jpg"
+    user && user?.avatarURL ? user.avatarURL : "/default-user.jpg",
   );
 
   const handleClick = () => {
@@ -31,13 +31,8 @@ const AccountDescription = () => {
         const formData = new FormData();
         formData.append("avatar", file);
         const response = await axiosToken.post(
-          "/user/upload-avatar",
+          "/api/user/upload-avatar",
           formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
         );
 
         if (response.status != 200) {
@@ -50,8 +45,9 @@ const AccountDescription = () => {
       }
     },
     onSuccess: async () => {
-      const getUser = await axiosToken.get(`/user/${user?.userId}`);
+      const getUser = await axiosToken.get(`/api/user/${user?.userId}`);
       await addUserData(getUser.data);
+      setPreview(getUser.data.avatarURL);
       // Invalidate and refetch the 'todos' query after successful mutation
       // queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
@@ -71,7 +67,7 @@ const AccountDescription = () => {
           onClick={handleClick}
           className={cn(
             "absolute inset-0 rounded-full opacity-0 group-hover:opacity-80 bg-neutral-600 z-10 transition-all duration-200 flex items-center justify-center cursor-pointer",
-            isPending && "opacity-80"
+            isPending && "opacity-80",
           )}
         >
           {isPending ? <Loading size={32} /> : <Pencil size={32} />}

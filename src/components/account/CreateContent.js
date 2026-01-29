@@ -45,7 +45,7 @@ const CreateContent = () => {
     formData.append("userId", userId);
 
     try {
-      const res = await axiosToken.post(`/upload`, formData, {
+      const res = await axiosToken.post(`/api/upload`, formData, {
         withCredentials: true,
         headers: {
           "x-title": title,
@@ -54,12 +54,12 @@ const CreateContent = () => {
         onUploadProgress: (progressEvent) => {
           console.log(progressEvent);
           const percentage = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
+            (progressEvent.loaded * 100) / progressEvent.total,
           );
           setUploadProgress(percentage);
         },
       });
-      if (res.status != 200) {
+      if (res.status != 201) {
         toast.error("Some error occured!");
         return;
       }

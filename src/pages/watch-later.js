@@ -4,6 +4,7 @@ import SignedOutUI from "@/components/signed-out/SavedVideos";
 import VideoCard from "@/components/VideoCard";
 import { constants } from "@/constants";
 import { useUser } from "@/contexts/UserContext";
+import { getSSRBaseURL } from "@/lib/ssr_baseURL";
 import { useMutation } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/router";
@@ -69,12 +70,16 @@ export default WatchLater;
 
 export async function getServerSideProps({ req }) {
   try {
-    const response = await axiosToken.get("/user/savedVideos/user", {
-      headers: {
-        Cookie: req.headers.cookie,
+    const baseURL = getSSRBaseURL(req);
+    const response = await axiosToken.get(
+      baseURL + "/api/user/savedVideos/user",
+      {
+        headers: {
+          Cookie: req.headers.cookie,
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    });
+    );
 
     return {
       props: {

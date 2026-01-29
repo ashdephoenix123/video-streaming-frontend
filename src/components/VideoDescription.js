@@ -32,7 +32,7 @@ const VideoDescription = ({ media }) => {
     checkAuth();
     try {
       const body = { userId: user.userId, mediaId: media._id, action: "like" };
-      const res = await axiosToken.post(`/user/likeOrSave`, body);
+      const res = await axiosToken.post(`/api/user/likeOrSave`, body);
 
       if (res.status === 200) {
         console.log(res);
@@ -52,7 +52,7 @@ const VideoDescription = ({ media }) => {
     checkAuth();
     try {
       const body = { userId: user.userId, mediaId: media._id, action: "save" };
-      const res = await axiosToken.post(`/user/likeOrSave`, body);
+      const res = await axiosToken.post(`/api/user/likeOrSave`, body);
 
       if (res.status === 200) {
         toast.success(res.data.message);
@@ -104,7 +104,7 @@ const VideoDescription = ({ media }) => {
               onClick={updateSubscription}
               variant={isSubscribed ? "secondary" : "tertiary"}
               className={cn(
-                "rounded-full text-xs font-medium lg:ml-4 self-center py-1.5 leading-6 ml-auto"
+                "rounded-full text-xs font-medium lg:ml-4 self-center py-1.5 leading-6 ml-auto",
               )}
             >
               Subscribe{isSubscribed ? "d" : ""}
