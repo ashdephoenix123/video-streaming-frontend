@@ -45,7 +45,7 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
     >
       <div className="w-full md:w-64 relative h-44 overflow-hidden">
         <Image
-          src={defaults.video}
+          src={vid?.thumbnailUrl || defaults.video}
           alt="preview"
           fill
           className="object-cover"
@@ -68,7 +68,7 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
       <div className="p-4 flex gap-8 flex-1">
         <div className="flex-1 space-y-1">
           <h2>{vid.title}</h2>
-          <p className="text-neutral-400">{vid.description}</p>
+          <p className="text-neutral-400 line-clamp-4">{vid.description}</p>
           <div className="flex items-center gap-1.5 mt-2">
             <Image
               src={uploader.uploaderAvatar || "/default-user.jpg"}

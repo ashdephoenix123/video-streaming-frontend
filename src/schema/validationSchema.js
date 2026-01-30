@@ -13,4 +13,10 @@ export const schema = yup.object().shape({
     .test("fileType", "Only MP4 files are allowed", (value) => {
       return value && ["video/mp4"].includes(value[0]?.type);
     }),
+  thumbnail: yup
+    .mixed()
+    .required("Thumbnail Image is required!")
+    .test("fileSize", "File is too large (max 2MB)", (value) => {
+      return value && value[0]?.size <= 2 * 1024 * 1024; // 2MB
+    }),
 });

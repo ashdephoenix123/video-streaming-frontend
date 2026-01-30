@@ -18,7 +18,7 @@ export default function Home({ allVideos, error }) {
       href={`/video/${video.slug}`}
       className="flex flex-col"
     >
-      <MediaPreview thumbnail={null} mediaURL={video.hlsUrl} />
+      <MediaPreview thumbnail={video?.thumbnailUrl} mediaURL={video.hlsUrl} />
       <div className="flex gap-2 mt-3 text-sm">
         <Image
           src={video.userId?.avatarURL ?? "/default-user.jpg"}

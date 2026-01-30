@@ -9,7 +9,12 @@ const SubVideos = ({ data }) => {
   const videos = data?.map((video) => (
     <Link key={video._id} href={`/video/${video.slug}`} className="space-y-1">
       <div className="relative w-full h-52 rounded-sm overflow-hidden">
-        <Image src={defaults.image} alt="" fill objectFit="cover" />
+        <Image
+          src={video?.thumbnailUrl || defaults.video}
+          alt=""
+          fill
+          objectFit="cover"
+        />
         {/* <VideoPlayer src={video.hlsUrl} /> */}
       </div>
       <h3 className="text-sm font-medium">{video.title}</h3>
