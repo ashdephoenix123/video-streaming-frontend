@@ -1,4 +1,5 @@
 import axiosToken from "@/axios/tokenAxios";
+import MediaPreview from "@/components/Preview/MediaPreview";
 import VideoPlayer from "@/components/VideoPlayer";
 import { constants } from "@/constants";
 import { getSSRBaseURL } from "@/lib/ssr_baseURL";
@@ -12,10 +13,12 @@ export default function Home({ allVideos, error }) {
   }
 
   let videos = allVideos.map((video) => (
-    <Link key={video._id} href={`/video/${video.slug}`}>
-      <div>
-        <VideoPlayer src={video.hlsUrl} />
-      </div>
+    <Link
+      key={video._id}
+      href={`/video/${video.slug}`}
+      className="flex flex-col"
+    >
+      <MediaPreview thumbnail={video?.thumbnailUrl} mediaURL={video.hlsUrl} />
       <div className="flex gap-2 mt-3 text-sm">
         <Image
           src={video.userId?.avatarURL ?? "/default-user.jpg"}

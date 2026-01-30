@@ -4,6 +4,8 @@ import { formatDistance } from "date-fns";
 import Link from "next/link";
 import Loading from "../Loading";
 import VideoPlayer from "../VideoPlayer";
+import Image from "next/image";
+import { defaults } from "@/constants";
 
 const MyVideos = () => {
   const { isPending, error, data } = useQuery({
@@ -13,8 +15,14 @@ const MyVideos = () => {
 
   const videos = data?.map((video) => (
     <Link key={video._id} href={`/video/${video.slug}`} className="space-y-1">
-      <div>
-        <VideoPlayer src={video.hlsUrl} />
+      <div className="w-full h-44 rounded-sm overflow-hidden relative">
+        <Image
+          src={video?.thumbnailUrl || defaults.video}
+          alt=""
+          fill
+          objectFit="cover"
+        />
+        {/* <VideoPlayer src={video.hlsUrl} /> */}
       </div>
       <h3 className="text-sm font-medium">{video.title}</h3>
       <p className="text-xs text-neutral-400">

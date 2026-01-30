@@ -47,9 +47,7 @@ const UploadVideo = () => {
           Selected File: {watch("video")[0].name}
         </p>
       ) : (
-        <span className="text-xs text-neutral-400 block">
-          Click above to upload a new video
-        </span>
+        <span className="text-xs text-neutral-400 block">Upload Video</span>
       )}
 
       {errors.video && (

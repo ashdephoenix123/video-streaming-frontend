@@ -9,9 +9,11 @@ import Loading from "../Loading";
 import TextField from "../TextField";
 import UploadVideo from "./UploadVideo";
 import axiosToken from "@/axios/tokenAxios";
+import UploadImage from "./UploadImage";
 
 const defaultValues = {
   video: null,
+  thumbnail: null,
   title: "",
   description: "",
 };
@@ -37,9 +39,10 @@ const CreateContent = () => {
   } = methods;
 
   const onSubmit = async (data) => {
-    const { video, title, description } = data;
+    const { video, thumbnail, title, description } = data;
     const formData = new FormData();
     formData.append("video", video[0]);
+    formData.append("thumbnail", thumbnail[0]);
     formData.append("title", title);
     formData.append("description", description);
     formData.append("userId", userId);
@@ -78,6 +81,8 @@ const CreateContent = () => {
           className="space-y-4 max-w-md lg:p-4"
         >
           <UploadVideo />
+
+          <UploadImage />
 
           <TextField
             label="Title*"

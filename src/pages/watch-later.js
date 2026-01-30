@@ -46,7 +46,7 @@ const WatchLater = ({ data, error }) => {
       <h1 className="text-lg font-semibold border-b border-gray-200 dark:border-gray-700 pb-1">
         Saved Videos
       </h1>
-      <div className="space-y-4 mt-4 max-w-3xl">
+      <div className="space-y-4 mt-4 max-w-2xl">
         {userSaved.length > 0
           ? userSaved.map((vid) => (
               <VideoCard

@@ -4,6 +4,7 @@ import { EllipsisVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { defaults } from "@/constants";
 
 const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   const [show, setShow] = useState(false);
@@ -22,7 +23,7 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   };
 
   let dropdownContent = (
-    <div className="absolute right-0 top-6 bg-neutral-700 rounded-lg py-1">
+    <div className="absolute right-0 top-6 bg-neutral-700 rounded-sm py-1">
       <ul className="text-xs min-w-24 text-center">
         {menuItems.map((item) => (
           <li
@@ -40,10 +41,17 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
   return (
     <Link
       href={"/video/" + vid?.slug}
-      className="border border-neutral-700 rounded-lg overflow-hidden flex flex-col md:flex-row"
+      className="border border-neutral-700 rounded-sm overflow-hidden flex flex-col md:flex-row"
     >
-      <div className="w-full md:w-80 relative h-44 overflow-hidden">
-        {vid.hlsUrl ? (
+      <div className="w-full md:w-64 relative h-44 overflow-hidden">
+        <Image
+          src={vid?.thumbnailUrl || defaults.video}
+          alt="preview"
+          fill
+          className="object-cover"
+        />
+
+        {/* {vid.hlsUrl ? (
           <VideoPlayer
             src={vid.hlsUrl}
             className="w-full h-full object-cover"
@@ -55,12 +63,12 @@ const VideoCard = ({ vid, uploader, menuItems, mutate }) => {
             fill
             className="object-cover"
           />
-        )}
+        )} */}
       </div>
       <div className="p-4 flex gap-8 flex-1">
         <div className="flex-1 space-y-1">
           <h2>{vid.title}</h2>
-          <p className="text-neutral-400">{vid.description}</p>
+          <p className="text-neutral-400 line-clamp-4">{vid.description}</p>
           <div className="flex items-center gap-1.5 mt-2">
             <Image
               src={uploader.uploaderAvatar || "/default-user.jpg"}
