@@ -109,14 +109,16 @@ Register.getLayout = function getLayout(page) {
 export default Register;
 
 export async function getServerSideProps({ req, res }) {
-  try {
+  if (req.cookies?.token) {
     return {
-      props: {},
-    };
-  } catch (error) {
-    console.error("GSSP Error (Register):", error);
-    return {
-      props: {},
+      redirect: {
+        destination: "/account",
+        permanent: false,
+      },
     };
   }
+
+  return {
+    props: {},
+  };
 }

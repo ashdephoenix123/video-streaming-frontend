@@ -24,14 +24,16 @@ const Account = () => {
 export default Account;
 
 export async function getServerSideProps({ req, res }) {
-  try {
+  if (!req.cookies?.token) {
     return {
-      props: {},
-    };
-  } catch (error) {
-    console.error("GSSP Error (account):", error);
-    return {
-      props: {},
+      redirect: {
+        destination: "/sign-in",
+        permanent: false,
+      },
     };
   }
+
+  return {
+    props: {},
+  };
 }

@@ -67,6 +67,15 @@ const History = ({ media, error }) => {
 export default History;
 
 export async function getServerSideProps({ req }) {
+  if (!req.cookies?.token) {
+    return {
+      redirect: {
+        destination: "/sign-in",
+        permanent: false,
+      },
+    };
+  }
+
   try {
     const baseURL = getSSRBaseURL(req);
     const response = await axiosToken.get(baseURL + "/api/user/history/user", {
