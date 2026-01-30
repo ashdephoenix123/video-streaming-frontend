@@ -15,7 +15,7 @@ const MyVideos = () => {
 
   const videos = data?.map((video) => (
     <Link key={video._id} href={`/video/${video.slug}`} className="space-y-1">
-      <div className="w-full h-44 rounded-sm overflow-hidden relative">
+      <div className="w-full h-60 lg:h-52 rounded-sm overflow-hidden relative">
         <Image
           src={video?.thumbnailUrl || defaults.video}
           alt=""
