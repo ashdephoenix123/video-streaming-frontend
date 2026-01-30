@@ -96,3 +96,18 @@ SignIn.getLayout = function getLayout(page) {
 };
 
 export default SignIn;
+
+export function getServerSideProps({ req, res }) {
+  if (req.cookies?.token) {
+    return {
+      redirect: {
+        destination: "/account",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

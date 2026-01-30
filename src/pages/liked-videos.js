@@ -73,6 +73,15 @@ const LikedVideos = ({ data, error }) => {
 export default LikedVideos;
 
 export async function getServerSideProps({ req }) {
+  if (!req.cookies?.token) {
+    return {
+      redirect: {
+        destination: "/sign-in",
+        permanent: false,
+      },
+    };
+  }
+
   try {
     const baseURL = getSSRBaseURL(req);
     const response = await axiosToken.get(
