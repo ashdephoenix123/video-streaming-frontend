@@ -2,12 +2,15 @@ import { formatDistance } from "date-fns";
 import Link from "next/link";
 import Loading from "../Loading";
 import VideoPlayer from "../VideoPlayer";
+import Image from "next/image";
+import { defaults } from "@/constants";
 
 const SubVideos = ({ data }) => {
   const videos = data?.map((video) => (
     <Link key={video._id} href={`/video/${video.slug}`} className="space-y-1">
-      <div>
-        <VideoPlayer src={video.hlsUrl} />
+      <div className="relative w-full h-52 rounded-sm overflow-hidden">
+        <Image src={defaults.image} alt="" fill objectFit="cover" />
+        {/* <VideoPlayer src={video.hlsUrl} /> */}
       </div>
       <h3 className="text-sm font-medium">{video.title}</h3>
       <p className="text-xs text-neutral-400">

@@ -65,3 +65,8 @@ export const subProfileTabs = [
 export const messages = {
   error: "Something went wrong",
 };
+
+export const defaults = {
+  image: "/default-user.jpg",
+  video: "/placeholder.jpg",
+};

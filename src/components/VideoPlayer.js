@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Hls from "hls.js";
 import { cn } from "@/lib/utils";
 
-export default function VideoPlayer({ src, className = "" }) {
+export default function VideoPlayer({ src, className = "", ...videoProps }) {
   const videoRef = useRef(null);
   const timeoutRef = useRef(null);
 
@@ -23,7 +23,7 @@ export default function VideoPlayer({ src, className = "" }) {
   const handleMouseEnter = () => {
     timeoutRef.current = setTimeout(() => {
       videoRef.current?.play().catch(() => {});
-    }, 200); // 1 second = 1000 ms
+    }, 200); // 200 ms
   };
 
   const handleMouseLeave = () => {
@@ -41,12 +41,10 @@ export default function VideoPlayer({ src, className = "" }) {
       muted
       playsInline
       preload="metadata"
-      className={cn(
-        "w-full aspect-video rounded-lg shadow cursor-pointer",
-        className
-      )}
+      className={cn("w-full h-full", className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      {...videoProps}
     />
   );
 }

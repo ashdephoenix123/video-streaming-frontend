@@ -50,7 +50,7 @@ const LikedVideos = ({ data, error }) => {
       <h1 className="text-lg font-semibold border-b border-gray-200 dark:border-gray-700 pb-1">
         Liked Videos
       </h1>
-      <div className="space-y-4 mt-4 max-w-3xl">
+      <div className="space-y-4 mt-4 max-w-2xl">
         {userLiked.length > 0
           ? userLiked.map((vid) => (
               <VideoCard
