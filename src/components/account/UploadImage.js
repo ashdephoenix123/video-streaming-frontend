@@ -51,6 +51,10 @@ const UploadImage = () => {
           Upload a Thumbnail Image
         </span>
       )}
+
+      {errors.thumbnail && (
+        <p className="text-red-500 text-xs mt-1">{errors.thumbnail.message}</p>
+      )}
     </div>
   );
 };
